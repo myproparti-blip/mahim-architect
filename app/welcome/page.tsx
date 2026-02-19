@@ -507,57 +507,7 @@ export default function WelcomePage() {
                     </div>
                 </div>
             </section>
-             {/* Statistics Section */}
-            <section className="relative px-4 py-20 md:py-28 bg-gradient-to-r from-orange-300 to-orange-400 text-white overflow-hidden">
-                <div className="absolute inset-0 opacity-10">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(255,255,255,0.1)_0%,transparent_50%)]"></div>
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(255,255,255,0.1)_0%,transparent_50%)]"></div>
-                </div>
-                <div className="max-w-6xl mx-auto relative z-10">
-                    <motion.div
-                        className="text-center mb-16"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                    >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">Our Impact & Experience</h2>
-                        <p className="text-blue-100 text-lg max-w-2xl mx-auto">
-                            Delivering excellence across projects and industries with proven expertise
-                        </p>
-                    </motion.div>
-
-                    <div className="grid md:grid-cols-4 gap-8">
-                        {[
-                            { number: "250+", label: "Projects Delivered", icon: Building2 },
-                            { number: "15+", label: "Years of Excellence", icon: Award },
-                            { number: "200+", label: "Satisfied Clients", icon: Users },
-                            { number: "50+", label: "Expert Professionals", icon: Briefcase }
-                        ].map((stat, index) => {
-                            const Icon = stat.icon
-                            return (
-                                <motion.div
-                                    key={index}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                                    className="text-center"
-                                >
-                                    <motion.div
-                                        className="flex justify-center mb-4"
-                                        whileHover={{ scale: 1.2, rotate: 5 }}
-                                    >
-                                        <Icon className="w-12 h-12 text-orange-100" />
-                                    </motion.div>
-                                    <h3 className="text-4xl md:text-5xl font-bold mb-2">{stat.number}</h3>
-                                    <p className="text-orange-100 text-lg">{stat.label}</p>
-                                </motion.div>
-                            )
-                        })}
-                    </div>
-                </div>
-            </section>
+           
 
 
             {/* Clients Section */}
