@@ -69,10 +69,10 @@ export function KeyPersonTimeline() {
         {/* Timeline */}
         <div className="relative">
           {/* Vertical Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-amber-600 to-amber-600/20" />
+          <div className="absolute right-4 md:left-1/2 md:right-auto md:transform md:-translate-x-1/2 w-1 h-full bg-gradient-to-b from-amber-600 to-amber-600/20" />
 
           {/* Timeline Items */}
-          <div className="space-y-16">
+          <div className="space-y-12 md:space-y-16">
             {milestones.map((milestone, index) => (
               <motion.div
                 key={milestone.year}
@@ -80,19 +80,19 @@ export function KeyPersonTimeline() {
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className={`flex gap-8 ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"} items-center`}
+                className={`flex gap-4 md:gap-8 items-center ${index % 2 === 0 ? "flex-row md:flex-row" : "flex-row md:flex-row-reverse"}`}
               >
                 {/* Content */}
                 <div className="flex-1 md:flex-1 lg:flex-1">
                   <Card className={`border-neutral-200/50 hover:border-neutral-300 transition-all duration-300 ${index % 2 === 0 ? "ml-0 md:ml-auto" : "ml-0 md:mr-auto"}`}>
-                    <CardContent className="p-8">
-                      <Badge className="mb-4 bg-amber-600 hover:bg-amber-700 text-white">
+                    <CardContent className="p-6 md:p-8">
+                      <Badge className="mb-4 bg-amber-600 hover:bg-amber-700 text-white text-xs md:text-sm">
                         {milestone.year}
                       </Badge>
-                      <h3 className="text-2xl font-bold text-neutral-900 mb-3">
+                      <h3 className="text-xl md:text-2xl font-bold text-neutral-900 mb-3">
                         {milestone.title}
                       </h3>
-                      <p className="text-neutral-600 leading-relaxed">
+                      <p className="text-sm md:text-base text-neutral-600 leading-relaxed">
                         {milestone.description}
                       </p>
                     </CardContent>
@@ -101,7 +101,7 @@ export function KeyPersonTimeline() {
 
                 {/* Center Circle */}
                 <motion.div
-                  className="relative z-10 w-16 h-16 rounded-full bg-amber-600 flex items-center justify-center text-2xl border-4 border-white shadow-lg flex-shrink-0"
+                  className="relative z-10 w-12 h-12 md:w-16 md:h-16 rounded-full bg-amber-600 flex items-center justify-center text-xl md:text-2xl border-4 border-white shadow-lg flex-shrink-0"
                   whileHover={{ scale: 1.2 }}
                   transition={{ duration: 0.3 }}
                 >
@@ -109,7 +109,7 @@ export function KeyPersonTimeline() {
                 </motion.div>
 
                 {/* Spacer */}
-                <div className="flex-1 hidden md:block" />
+                <div className="hidden md:block flex-1" />
               </motion.div>
             ))}
           </div>

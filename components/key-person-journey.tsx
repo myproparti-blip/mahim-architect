@@ -107,7 +107,7 @@ export function KeyPersonJourney() {
           <div className="relative">
             {/* Animated Background Line */}
             <motion.div
-              className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-emerald-500 via-amber-500 to-cyan-500"
+              className="absolute right-4 md:left-1/2 md:right-auto md:transform md:-translate-x-1/2 w-1 bg-gradient-to-b from-emerald-500 via-amber-500 to-cyan-500"
               initial={{ height: 0 }}
               whileInView={{ height: "100%" }}
               transition={{ duration: 1.5 }}
@@ -119,41 +119,41 @@ export function KeyPersonJourney() {
               {journeySteps.map((step, index) => (
                 <motion.div
                   key={step.year}
-                  className={`flex gap-8 items-start ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}
+                  className={`flex gap-4 md:gap-8 items-start ${index % 2 === 0 ? "flex-row md:flex-row" : "md:flex-row-reverse flex-row"}`}
                   initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
                   {/* Content Card */}
-                  <div className="flex-1">
+                  <div className="flex-1 md:flex-1">
                     <Card className={`border-2 border-transparent hover:border-amber-600 transition-all duration-300 group overflow-hidden`}>
                       {/* Top Gradient Bar */}
                       <div className={`h-2 bg-gradient-to-r ${colorClasses[step.color as keyof typeof colorClasses]}`} />
 
-                      <CardContent className="p-8">
+                      <CardContent className="p-6 md:p-8">
                         {/* Year & Period */}
                         <div className="flex items-center gap-3 mb-3">
-                          <Badge className={`bg-gradient-to-r ${colorClasses[step.color as keyof typeof colorClasses]} text-white`}>
+                          <Badge className={`bg-gradient-to-r ${colorClasses[step.color as keyof typeof colorClasses]} text-white text-xs md:text-sm`}>
                             {step.year}
                           </Badge>
-                          <span className="text-xs font-bold text-neutral-500 uppercase tracking-widest">
+                          <span className="text-xs font-bold text-neutral-500 uppercase tracking-widest hidden md:inline-block">
                             {step.period}
                           </span>
                         </div>
 
                         {/* Title */}
-                        <h3 className="text-2xl font-bold text-neutral-900 mb-3 group-hover:text-amber-600 transition-colors">
+                        <h3 className="text-xl md:text-2xl font-bold text-neutral-900 mb-3 group-hover:text-amber-600 transition-colors">
                           {step.title}
                         </h3>
 
                         {/* Description */}
-                        <p className="text-neutral-600 leading-relaxed mb-4">
+                        <p className="text-sm md:text-base text-neutral-600 leading-relaxed mb-4">
                           {step.description}
                         </p>
 
                         {/* Metrics Badge */}
-                        <div className={`inline-block px-4 py-2 rounded-lg ${bgColors[step.color as keyof typeof bgColors]} text-sm font-semibold text-neutral-700`}>
+                        <div className={`inline-block px-3 md:px-4 py-2 rounded-lg ${bgColors[step.color as keyof typeof bgColors]} text-xs md:text-sm font-semibold text-neutral-700`}>
                           {step.metrics}
                         </div>
                       </CardContent>
@@ -162,14 +162,14 @@ export function KeyPersonJourney() {
 
                   {/* Center Circle with Icon */}
                   <motion.div
-                    className={`relative z-10 w-16 h-16 rounded-full bg-gradient-to-br ${colorClasses[step.color as keyof typeof colorClasses]} flex items-center justify-center text-3xl border-4 border-white shadow-xl flex-shrink-0 group-hover:scale-110 transition-transform`}
+                    className={`relative z-10 w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br ${colorClasses[step.color as keyof typeof colorClasses]} flex items-center justify-center text-xl md:text-3xl border-4 border-white shadow-xl flex-shrink-0 group-hover:scale-110 transition-transform mt-1`}
                     whileHover={{ scale: 1.15 }}
                   >
                     {step.icon}
                   </motion.div>
 
                   {/* Spacer */}
-                  <div className="flex-1 hidden md:block" />
+                  <div className="hidden md:block flex-1" />
                 </motion.div>
               ))}
             </div>

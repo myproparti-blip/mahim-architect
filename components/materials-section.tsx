@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/image"
 import { Reveal } from "./reveal"
 import { cn } from "@/lib/utils"
 
@@ -97,29 +96,30 @@ export function MaterialsSection() {
     }
 
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden" id="materials">
+        <section className="relative min-h-screen md:min-h-screen flex items-center justify-center overflow-hidden" id="materials">
+            {/* Background Images */}
             <div className="absolute inset-0 z-0">
                 {materials.map((material) => (
                     <motion.div
                         key={material.id}
-                        className="absolute inset-0"
+                        className="absolute inset-0 w-full h-full"
                         initial={{ opacity: material.id === activeMaterial ? 1 : 0 }}
                         animate={{ opacity: material.id === activeMaterial ? 1 : 0 }}
                         transition={{ duration: 0.4, ease: "easeInOut" }}
                     >
-                        <Image
+                        <img
                             src={material.backgroundImage || "/placeholder.svg"}
                             alt={`${material.name} interior scene`}
-                            fill
-                            className="object-cover"
-                            priority
+                            className="w-full h-full object-cover"
+                            loading="eager"
                         />
                     </motion.div>
                 ))}
-                <div className="absolute inset-0 bg-black/20" />
+                {/* Overlay - darker on mobile for better text contrast */}
+                <div className="absolute inset-0 bg-black/30 sm:bg-black/20" />
             </div>
 
-            <div className="absolute top-[120px] left-0 right-0 z-10">
+            <div className="absolute top-[120px] left-0 right-0 z-10 px-4 sm:px-0">
                 <div className="container-custom text-white">
                     <Reveal>
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -131,7 +131,7 @@ export function MaterialsSection() {
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: -20 }}
                                         transition={{ duration: 0.3, ease: "easeInOut" }}
-                                        className="font-bold mb-6 text-7xl"
+                                        className="font-bold mb-6 text-4xl sm:text-5xl lg:text-7xl"
                                     >
                                         <AnimatedText text={activeMaterialData.name} delay={0.2} />
                                     </motion.h2>
@@ -143,7 +143,7 @@ export function MaterialsSection() {
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: -10 }}
                                         transition={{ duration: 0.3 }}
-                                        className="text-lg text-white/90 leading-relaxed max-w-2xl"
+                                        className="text-base sm:text-lg text-white/90 leading-relaxed max-w-2xl"
                                     >
                                         {activeMaterialData.description}
                                     </motion.p>
@@ -170,7 +170,7 @@ export function MaterialsSection() {
                 </div>
             </div>
 
-            <div className="absolute bottom-8 left-8 z-10 max-w-md hidden">
+            <div className="absolute bottom-24 sm:bottom-8 left-4 sm:left-8 z-10 max-w-md hidden">
                 <Reveal delay={0.3}>
                     <blockquote className="pl-0 py-4">
                         <p className="text-xl text-white leading-relaxed italic lg:text-base font-medium">
@@ -182,15 +182,15 @@ export function MaterialsSection() {
                 </Reveal>
             </div>
 
-            <div className="absolute bottom-8 left-0 right-0 z-10">
+            <div className="absolute bottom-8 left-0 right-0 z-10 px-4">
                 <div className="container-custom">
                     <Reveal delay={0.1}>
-                        <div className="flex flex-wrap justify-center gap-3">
+                        <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
                             {materials.map((material) => (
                                 <motion.button
                                     key={material.id}
                                     className={cn(
-                                        "px-6 py-3 rounded-full font-medium transition-all duration-300 backdrop-blur-md",
+                                        "px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base rounded-full font-medium transition-all duration-300 backdrop-blur-md",
                                         activeMaterial === material.id
                                             ? "bg-white text-neutral-900"
                                             : "bg-white/20 text-white hover:bg-white/30",
