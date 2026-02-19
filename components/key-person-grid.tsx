@@ -9,7 +9,7 @@ const teamMembers = [
     id: "1",
     name: "Ashish Patel",
     title: "Founder & Principal Architect",
-    image: "/images/ashish-patel.jpg",
+    image: "/images/admin/01-HIGH-RESOLUTION-PHOTO-ASHISH-PATEL.jpg",
     bio: "With 15+ years of experience, Ashish leads Mahim with visionary architecture that blends sustainability with contemporary design. His creative leadership since 2009 has shaped the firm's philosophy of design excellence.",
     experience: "15+ Years in Architecture & Design",
     specialties: [
@@ -26,71 +26,7 @@ const teamMembers = [
     },
     featured: true,
   },
-  {
-    id: "2",
-    name: "Priya Sharma",
-    title: "Design Director",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&h=800&fit=crop",
-    bio: "Leading creative direction across all projects, Priya ensures design excellence through innovative concepts and meticulous execution. Her expertise in contemporary design drives our creative vision.",
-    experience: "12+ Years in Design Leadership",
-    specialties: ["Interior Design", "Landscape Architecture", "Color Theory", "3D Visualization"],
-    social: {
-      linkedin: "https://linkedin.com",
-      email: "priya@mahim.com",
-    },
-  },
-  {
-    id: "3",
-    name: "Rajesh Kumar",
-    title: "Senior Architect",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&h=800&fit=crop",
-    bio: "With expertise in large-scale commercial projects, Rajesh brings technical precision and innovative solutions to complex architectural challenges.",
-    experience: "10+ Years in Commercial Architecture",
-    specialties: ["Commercial Design", "Project Management", "CAD", "BIM Modeling"],
-    social: {
-      linkedin: "https://linkedin.com",
-      email: "rajesh@mahim.com",
-    },
-  },
-  {
-    id: "4",
-    name: "Sophia Anderson",
-    title: "Landscape Architect",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&h=800&fit=crop",
-    bio: "Specializing in sustainable landscape design, Sophia creates outdoor spaces that enhance environmental quality while providing aesthetic excellence.",
-    experience: "8+ Years in Landscape Design",
-    specialties: ["Landscape Design", "Sustainability", "Ecological Planning", "Water Features"],
-    social: {
-      linkedin: "https://linkedin.com",
-      email: "sophia@mahim.com",
-    },
-  },
-  {
-    id: "5",
-    name: "Dev Patel",
-    title: "Project Manager",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=800&fit=crop",
-    bio: "Overseeing day-to-day operations with regular client engagement, Dev ensures quality control and timely delivery across all projects.",
-    experience: "7+ Years in Project Management",
-    specialties: ["Client Relations", "Quality Control", "Timeline Management", "Team Coordination"],
-    social: {
-      linkedin: "https://linkedin.com",
-      email: "dev@mahim.com",
-    },
-  },
-  {
-    id: "6",
-    name: "Maya Singh",
-    title: "Interior Designer",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&h=800&fit=crop",
-    bio: "Creative interior design specialist focused on creating spaces that balance aesthetics with functionality and client vision.",
-    experience: "6+ Years in Interior Design",
-    specialties: ["Interior Design", "Space Planning", "Furniture Selection", "Material Sourcing"],
-    social: {
-      linkedin: "https://linkedin.com",
-      email: "maya@mahim.com",
-    },
-  },
+  
 ]
 
 export function KeyPersonGrid() {

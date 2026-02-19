@@ -13,7 +13,7 @@ const featuredProjects = [
         id: "1",
         name: "Contemporary Residence",
         price: "Completed 2024",
-        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=800&fit=crop",
+        image:  "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=800&fit=crop",
         badge: "New" as const,
         materials: ["Modern Design", "Sustainable Materials"],
         swatches: [
@@ -22,11 +22,17 @@ const featuredProjects = [
             { name: "Glass", color: "#E8F4F8" },
         ],
         quickLookImages: [
-            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=800&fit=crop",
+            "https://images.unsplash.com/photo-1512917774080-9264f475eabf?w=600&h=800&fit=crop",
             "https://images.unsplash.com/photo-1600566753086-00f18a0cc482?w=600&h=800&fit=crop",
-            "https://images.unsplash.com/photo-1600573472550-8090b5e9e8de?w=600&h=800&fit=crop",
+            "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=800&fit=crop",
         ],
         dimensions: "3,500 sq meters",
+        highlights: [
+            "Energy-efficient climate control",
+            "Natural lighting integration",
+            "Open-plan living spaces",
+            "Eco-friendly materials",
+        ],
     },
     {
         id: "2",
@@ -46,12 +52,18 @@ const featuredProjects = [
             "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=600&h=800&fit=crop",
         ],
         dimensions: "15,000 sq meters",
+        highlights: [
+            "Smart building automation",
+            "Collaborative workspaces",
+            "Sustainable urban design",
+            "Advanced ventilation systems",
+        ],
     },
     {
         id: "3",
         name: "Luxury Villa Design",
         price: "Planning Phase",
-        image: "https://images.unsplash.com/photo-1600607687644-c173886a8553?w=600&h=800&fit=crop",
+        image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=800&fit=crop",
         badge: "Limited" as const,
         materials: ["Contemporary Style", "Premium Finishes"],
         swatches: [
@@ -60,11 +72,17 @@ const featuredProjects = [
             { name: "Charcoal", color: "#36454F" },
         ],
         quickLookImages: [
-            "https://images.unsplash.com/photo-1600607687644-c173886a8553?w=600&h=800&fit=crop",
-            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=800&fit=crop",
-            "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=800&fit=crop",
+            "https://images.unsplash.com/photo-1499696010180-025ef6d5a621?w=600&h=800&fit=crop",
+            "https://images.unsplash.com/photo-1600566753086-00f18a0cc482?w=600&h=800&fit=crop",
+            "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=800&fit=crop",
         ],
         dimensions: "2,800 sq meters",
+        highlights: [
+            "Luxury spa and wellness area",
+            "Private infinity pool",
+            "Home automation system",
+            "Premium marble finishes",
+        ],
     },
 ]
 
@@ -84,7 +102,7 @@ export function FeaturedProducts() {
 
     return (
         <section className="py-24 lg:py-40 bg-white" id="featured-products">
-            <div className="container mx-auto px-12 lg:px-20">
+            <div className="container mx-auto px-4 lg:px-8">
                 <div className="mb-20">
                     <Reveal>
                         <div className="flex items-end justify-between mb-6">
@@ -131,7 +149,7 @@ export function FeaturedProducts() {
                     </Reveal>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 px-0 lg:px-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
                     {featuredProjects.map((project, index) => (
                         <motion.div
                             key={project.id}
@@ -143,6 +161,7 @@ export function FeaturedProducts() {
                                 ease: [0.21, 0.47, 0.32, 0.98],
                             }}
                             viewport={{ once: true, margin: "-100px" }}
+                            className="h-full"
                         >
                             <ProjectCard project={project} onQuickLook={handleQuickLook} />
                         </motion.div>

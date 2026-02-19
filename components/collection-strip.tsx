@@ -7,86 +7,106 @@ import Link from "next/link"
 import { Reveal } from "./reveal"
 import { ArrowRight } from "lucide-react"
 
-const collections = [
+interface Property {
+    id: number
+    name: string
+    category: string
+    location: string
+    thumbnail: string
+    images: string[]
+    description: string
+}
+
+const DEMO_PROPERTIES: Property[] = [
     {
-        id: "residential",
-        name: "RESIDENTIAL",
-        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=480&h=600&fit=crop",
-        count: "12 projects",
-        description: "Modern homes & villas",
+        id: 1,
+        name: "Surat Diamond Bourse",
+        category: "Commercial, High rise commercial",
+        location: "SURAT, GUJARAT",
+        thumbnail: "/images/portfolio/property-1-4.jpg",
+        images: ["/images/portfolio/property-1-3.jpg", "/images/portfolio/property-1-4.jpg"],
+        description: "Surat Diamond Bourse Office Interior Design As a leading role of Best Interior Designer, we design Diamond Office in Surat Diamond Bourse (SDB) the largest office building in this world located at Surat, Gujarat, India. With our knowledge and expertise team at Mahim Architect, we create a unique Diamond office interior design that is reflect every aspect of diamond business.",
+    },
+    {
+        id: 2,
+        name: "ANTILIA SKY",
         category: "Residential",
+        location: "VARIAV, SURAT, GUJARAT.",
+        thumbnail: "/images/portfolio/RIVERFRONT-min.jpg",
+        images: ["/images/portfolio/RIVERFRONT_COMP.jpg", "/images/portfolio/RIVERFRONT-min.jpg"],
+        description: "Modern high-rise apartment complex featuring spacious units, contemporary design, and community spaces.",
     },
     {
-        id: "commercial",
-        name: "COMMERCIAL",
-        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=480&h=600&fit=crop",
-        count: "8 projects",
-        description: "Office & retail spaces",
+        id: 3,
+        name: "Crystal Luxuria",
+        category: "Highrise Residential Project",
+        location: "Surat, Gujarat",
+        thumbnail: "/images/portfolio/013_GATE_FRONT_TOP.jpg",
+        images: ["/images/portfolio/013_GATE_FRONT_TOP.jpg"],
+        description: "Elegant residential development with sophisticated architecture and premium living spaces.",
+    },
+    {
+        id: 4,
+        name: "PRAGATI THE WORLD",
         category: "Commercial",
+        location: "Surat, Gujarat",
+        thumbnail: "/images/portfolio/Cam-01-New-16-10-2022-02.jpg",
+        images: ["/images/portfolio/Cam-01-New-16-10-2022-02.jpg"],
+        description: "Modern commercial complex with architectural excellence and green spaces.",
     },
     {
-        id: "hospitality",
-        name: "HOSPITALITY",
-        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=480&h=600&fit=crop",
-        count: "6 projects",
-        description: "Hotels & restaurants",
-        category: "Hospitality",
+        id: 5,
+        name: "IT PARK 2",
+        category: "Commercial",
+        location: "YOGI CHOWK, NANA VARACCHA, SURAT, GUJARAT.",
+        thumbnail: "/images/portfolio/IT-PARK-2-1.jpeg",
+        images: ["/images/portfolio/IT-PARK-2-1.jpeg"],
+        description: "Modern commercial complex with office spaces and retail outlets.",
     },
     {
-        id: "institutional",
-        name: "INSTITUTIONAL",
-        image: "https://images.unsplash.com/photo-1577720643272-265f434f2d2f?w=480&h=600&fit=crop",
-        count: "5 projects",
-        description: "Educational & cultural",
-        category: "Institutional",
+        id: 6,
+        name: "Vesu Bunglow",
+        category: "BUNGLOW",
+        location: "VESU, SURAT",
+        thumbnail: "/images/portfolio/RESIZE.jpg",
+        images: ["/images/portfolio/RESIZE.jpg"],
+        description: "Spacious bungalow with modern design, landscaped gardens, and luxurious amenities.",
     },
     {
-        id: "mixed-use",
-        name: "MIXED-USE",
-        image: "https://images.unsplash.com/photo-1486718448742-163732cd3d3d?w=480&h=600&fit=crop",
-        count: "7 projects",
-        description: "Multi-functional spaces",
-        category: "Mixed-Use",
+        id: 7,
+        name: "Emerald Gardens",
+        category: "BUNGLOW",
+        location: "UTTRAN, SURAT",
+        thumbnail: "/images/portfolio/FINAL.jpg",
+        images: ["/images/portfolio/FINAL.jpg", "/images/portfolio/FINAL-870x434.jpg"],
+        description: "Luxurious bungalow with lush gardens, elegant interiors, and premium amenities for a serene living experience.",
     },
     {
-        id: "renovation",
-        name: "RENOVATION",
-        image: "https://images.unsplash.com/photo-1622157227541-6d27e6d0e1f7?w=480&h=600&fit=crop",
-        count: "9 projects",
-        description: "Heritage & restoration",
-        category: "Heritage",
+        id: 8,
+        name: "Hari Om Bungalow",
+        category: "BUNGLOW, Residential",
+        location: "Piplod, Surat, Gujarat",
+        thumbnail: "/images/portfolio/FINAL-ELEVATION-3D.jpg",
+        images: ["/images/portfolio/FINAL-ELEVATION-3D.jpg"],
+        description: "Elegant bungalow with modern design, spacious interiors, and landscaped gardens for a luxurious lifestyle.",
     },
     {
-        id: "landscape",
-        name: "LANDSCAPE",
-        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=480&h=600&fit=crop",
-        count: "4 projects",
-        description: "Outdoor & gardens",
-        category: "Landscape",
+        id: 9,
+        name: "SAJAN BUNGLOW",
+        category: "BUNGLOW",
+        location: "SURAT, GUJARAT",
+        thumbnail: "/images/portfolio/NITINBHAI-01.png",
+        images: ["/images/portfolio/NITINBHAI-01.png"],
+        description: "Spacious bungalow with contemporary design, landscaped gardens, and premium amenities for a luxurious living experience.",
     },
     {
-        id: "interior",
-        name: "INTERIOR DESIGN",
-        image: "https://images.unsplash.com/photo-1512828573330-fbdfe5f0b0a0?w=480&h=600&fit=crop",
-        count: "10 projects",
-        description: "Bespoke interiors",
-        category: "Interior",
-    },
-    {
-        id: "sustainable",
-        name: "SUSTAINABLE",
-        image: "https://images.unsplash.com/photo-1554224311-beee415c15cb?w=480&h=600&fit=crop",
-        count: "6 projects",
-        description: "Green buildings",
-        category: "Sustainable",
-    },
-    {
-        id: "urban-planning",
-        name: "URBAN PLANNING",
-        image: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=480&h=600&fit=crop",
-        count: "3 projects",
-        description: "City development",
-        category: "Urban",
+        id: 10,
+        name: "AALEKH BUNGLOWS HOUSE, PLAYGROUND, GARDEN, GATE.",
+        category: "Residential",
+        location: "UTRAN, SURAT, GUJARAT,",
+        thumbnail: "/images/portfolio/HOUSE-1.jpeg",
+        images: ["/images/portfolio/HOUSE-1.jpeg", "/images/portfolio/PLAYGROUND-1.jpeg", "/images/portfolio/GARGEN-1.jpeg", "/images/portfolio/GATE.jpg"],
+        description: "Spacious residential property with a house, playground, garden, and gate, designed for comfortable living and outdoor enjoyment.",
     },
 ]
 
@@ -101,30 +121,33 @@ export function CollectionStrip() {
 
     const x = useTransform(scrollYProgress, [0, 1], [0, -100])
 
-    const itemWidth = 320 // w-80 + gap
-    const itemGap = 32 // gap-8
+    const itemWidth = 300 // card width
+    const itemHeight = 500 // card height - portrait style
+    const itemGap = 20 // gap between cards
     const totalItemWidth = itemWidth + itemGap
-    const visibleCards = 4 // Show 4 cards initially
-    const visibleWidth = visibleCards * itemWidth + (visibleCards - 1) * itemGap // Width of 4 cards + gaps
-    const totalScrollableWidth = collections.length * itemWidth + (collections.length - 1) * itemGap
-    const maxDrag = Math.max(0, totalScrollableWidth - visibleWidth)
-    const sidePadding = 80 // Padding on both sides
+    const visibleCards = 5 // Show 5 cards
+    const visibleWidth = visibleCards * itemWidth + (visibleCards - 1) * itemGap // Width of 5 cards + gaps
 
-    // Auto scroll effect - only within the visible cards
+    // Duplicate properties for seamless infinite loop
+    const extendedProperties = [...DEMO_PROPERTIES, ...DEMO_PROPERTIES]
+    const totalScrollableWidth = extendedProperties.length * itemWidth + (extendedProperties.length - 1) * itemGap
+
+    // Auto scroll effect - slide from right to left (one card at a time)
     useEffect(() => {
         const interval = setInterval(() => {
             setScrollPosition((prev) => {
-                const nextPosition = prev + totalItemWidth
-                // Loop back to start when reaching end
-                if (nextPosition >= maxDrag) {
+                const nextPosition = prev - totalItemWidth
+                // Seamlessly loop when reaching middle (original length)
+                const singleCycleWidth = DEMO_PROPERTIES.length * itemWidth + (DEMO_PROPERTIES.length - 1) * itemGap
+                if (nextPosition <= -singleCycleWidth) {
                     return 0
                 }
                 return nextPosition
             })
-        }, 3000)
+        }, 4000)
 
         return () => clearInterval(interval)
-    }, [maxDrag, totalItemWidth])
+    }, [totalItemWidth])
 
     return (
         <section ref={containerRef} className="py-24 lg:py-40 overflow-hidden bg-gradient-to-b from-white to-neutral-50">
@@ -138,11 +161,10 @@ export function CollectionStrip() {
                                 transition={{ duration: 0.6 }}
                                 viewport={{ once: true }}
                             >
-                                <p className="text-amber-600 font-semibold tracking-widest text-sm mb-4 uppercase">Our Expertise</p>
-                                <h2 className="text-5xl lg:text-6xl text-neutral-900 mb-6 font-bold">Project Categories</h2>
+                                <p className="text-amber-600 font-semibold tracking-widest text-sm mb-4 uppercase">Featured Works</p>
+                                <h2 className="text-5xl lg:text-6xl text-neutral-900 mb-6 font-bold">Our Projects</h2>
                                 <p className="text-lg text-neutral-600 leading-relaxed">
-                                    Explore our diverse range of architectural services, each representing our commitment to design excellence and
-                                    client satisfaction across various project types.
+                                    Discover our latest architectural masterpieces. Auto-scrolling carousel showcasing five featured projects at a time.
                                 </p>
                             </motion.div>
                         </div>
@@ -150,75 +172,81 @@ export function CollectionStrip() {
                 </Reveal>
             </div>
 
-            <div className="relative overflow-hidden">
-                <motion.div
-                    ref={scrollContainerRef}
-                    className="flex gap-8"
-                    animate={{ x: -scrollPosition }}
-                    transition={{ duration: 0.8, ease: "easeInOut" }}
+            <div className="relative w-full flex justify-center px-8 lg:px-16">
+                {/* Fixed window showing exactly 5 cards */}
+                <div
+                    className="overflow-hidden pr-8"
+                    style={{ width: `${visibleWidth + 40}px` }}
                 >
-                    {/* Left empty space */}
-                    <div className="flex-shrink-0 w-20 lg:w-32" />
-
-                    {collections.map((collection, index) => (
-                        <motion.div
-                            key={collection.id}
-                            className="flex-shrink-0 w-80 group cursor-pointer"
-                            whileHover={{ y: -10 }}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.05, duration: 0.5 }}
-                        >
-                            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden mb-5 shadow-lg group-hover:shadow-2xl transition-all duration-500">
-                                <motion.div
-                                    className="relative w-full h-full"
-                                    whileHover={{ scale: 1.1 }}
-                                    transition={{ duration: 0.5 }}
-                                >
-                                    <Image
-                                        src={collection.image}
-                                        alt={collection.name}
-                                        fill
-                                        className="object-cover"
-                                        sizes="340px"
-                                        priority={index < 3}
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-400" />
-                                </motion.div>
-
-                                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <motion.div
+                        ref={scrollContainerRef}
+                        className="flex gap-6"
+                        animate={{ x: scrollPosition }}
+                        transition={{ duration: 0.8, ease: "easeInOut" }}
+                        style={{
+                            width: `${totalScrollableWidth}px`,
+                        }}
+                    >
+                        {extendedProperties.map((property, index) => (
+                            <motion.div
+                                key={`${property.id}-${index >= DEMO_PROPERTIES.length ? 'dup' : 'orig'}`}
+                                className="flex-shrink-0 group cursor-pointer flex flex-col rounded-3xl overflow-hidden bg-white shadow-lg hover:shadow-2xl transition-all duration-500"
+                                style={{ width: `${itemWidth}px`, height: `${itemHeight}px` }}
+                                whileHover={{ y: -12 }}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.05, duration: 0.5 }}
+                            >
+                                {/* Image Section - 75% height */}
+                                <div className="relative w-full overflow-hidden flex-1">
                                     <motion.div
-                                        className="text-center text-white"
-                                        initial={{ opacity: 0.8, scale: 1 }}
-                                        whileHover={{ opacity: 1, scale: 1.05 }}
-                                        transition={{ duration: 0.3 }}
+                                        className="relative w-full h-full"
+                                        whileHover={{ scale: 1.1 }}
+                                        transition={{ duration: 0.5 }}
                                     >
-                                        <h3 className="text-2xl lg:text-3xl font-bold tracking-wide mb-2 drop-shadow-lg">{collection.name}</h3>
-                                        <p className="text-xs lg:text-sm font-medium opacity-90 drop-shadow-md">{collection.count}</p>
+                                        <Image
+                                            src={property.thumbnail}
+                                            alt={property.name}
+                                            fill
+                                            className="object-cover"
+                                            sizes="300px"
+                                            priority={index < 5}
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-400" />
                                     </motion.div>
+
+                                    {/* Text Overlay on Image */}
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                        <motion.h3
+                                            className="text-2xl font-bold text-white text-center drop-shadow-lg line-clamp-2 px-3"
+                                            initial={{ opacity: 0.9 }}
+                                            whileHover={{ opacity: 1, scale: 1.05 }}
+                                            transition={{ duration: 0.3 }}
+                                        >
+                                            {property.name}
+                                        </motion.h3>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className="space-y-3">
-                                <p className="text-neutral-600 text-sm font-medium">{collection.description}</p>
-                                <Link href={`/portfolio?category=${encodeURIComponent(collection.name)}`}>
-                                    <motion.button
-                                        className="w-full py-2.5 bg-neutral-900 hover:bg-amber-600 text-white font-semibold text-sm rounded-lg transition-all duration-300 flex items-center justify-center gap-2 group/btn"
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
-                                    >
-                                        Explore
-                                        <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform duration-300" />
-                                    </motion.button>
-                                </Link>
-                            </div>
-                        </motion.div>
-                    ))}
-
-                    {/* Right empty space */}
-                    <div className="flex-shrink-0 w-20 lg:w-32" />
-                </motion.div>
+                                {/* Bottom Section - 25% height */}
+                                <div className="px-4 py-4 flex flex-col justify-between flex-shrink-0 bg-white">
+                                    <p className="text-neutral-600 text-xs font-medium line-clamp-1 mb-3">{property.category}</p>
+                                    <Link href={`/portfolio?category=${encodeURIComponent(property.category)}`}>
+                                        <motion.button
+                                            className="w-full py-2.5 bg-black hover:bg-amber-600 text-white font-semibold text-sm rounded-lg transition-all duration-300 flex items-center justify-center gap-2 group/btn"
+                                            whileHover={{ scale: 1.05 }}
+                                            whileTap={{ scale: 0.95 }}
+                                        >
+                                            Explore
+                                            <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform duration-300" />
+                                        </motion.button>
+                                    </Link>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                </div>
             </div>
         </section>
     )

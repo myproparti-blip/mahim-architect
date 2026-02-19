@@ -91,7 +91,7 @@ export function HeroSection() {
         </div>
       </motion.div>
 
-      {/* Info Strip */}
+      {/* property related */}
       <motion.div
         className="absolute bottom-0 left-0 right-0 z-20 flex justify-center"
         initial={{ opacity: 0, y: 20 }}
@@ -102,15 +102,15 @@ export function HeroSection() {
           <div className="flex items-center justify-center gap-6 text-white/90">
             <div className="flex items-center gap-2">
               <PackageCheck className="w-4 h-4 text-green-400" />
-              <span className="text-sm">Free shipping</span>
+              <span className="text-sm">Ready to Move</span>
             </div>
             <div className="flex items-center gap-2">
               <Rocket className="w-4 h-4 text-amber-400" />
-              <span className="text-sm">Delivered in 6 weeks</span>
+              <span className="text-sm">Quick Handover</span>
             </div>
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-blue-400" />
-              <span className="text-sm">Lifetime guarantee</span>
+              <span className="text-sm">Legal Approved</span>
             </div>
           </div>
         </BlurPanel>

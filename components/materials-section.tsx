@@ -11,49 +11,61 @@ const materials = [
         id: "pistachio",
         name: "Pistachio",
         description: "Luxurious pistachio green velvet with rich texture and depth",
+        fullDescription: "This stunning pistachio finish combines natural inspiration with modern sophistication. Perfect for creating warm, inviting spaces with a contemporary edge.",
         image: "https://images.unsplash.com/photo-1578500494198-246f612d03b3?w=500&h=500&fit=crop",
         backgroundImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop",
         tint: "bg-green-50",
+        colorCode: "#9DC183",
     },
     {
         id: "lunar",
         name: "Lunar",
         description: "Sophisticated lunar gray with subtle metallic undertones",
+        fullDescription: "A refined gray tone inspired by moonlit elegance. This versatile finish brings sophistication to any architectural project with its understated metallic shimmer.",
         image: "https://images.unsplash.com/photo-1585399572869-10e5e97ab0c4?w=500&h=500&fit=crop",
-        backgroundImage: "https://images.unsplash.com/photo-1600607687644-c173886a8553?w=1200&h=800&fit=crop",
+        backgroundImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&h=800&fit=crop",
         tint: "bg-gray-100",
+        colorCode: "#A9A9A9",
     },
     {
         id: "martian",
         name: "Martian",
         description: "Bold martian red with warm terracotta influences",
+        fullDescription: "Inspired by Martian landscapes, this bold red brings warmth and energy to any space. Combines earthy terracotta tones with modern design sensibilities.",
         image: "https://images.unsplash.com/photo-1578500494198-246f612d03b3?w=500&h=500&fit=crop",
-        backgroundImage: "https://images.unsplash.com/photo-1600573472550-8090b5e9e8de?w=1200&h=800&fit=crop",
+        backgroundImage: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&h=800&fit=crop",
         tint: "bg-red-50",
+        colorCode: "#C41E3A",
     },
     {
         id: "obsidian",
         name: "Obsidian",
         description: "Deep obsidian black with sleek modern aesthetic",
+        fullDescription: "Pure, elegant darkness with a polished finish. Obsidian black creates dramatic contrast and timeless sophistication in contemporary architecture.",
         image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&h=500&fit=crop",
         backgroundImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=800&fit=crop",
         tint: "bg-gray-900",
+        colorCode: "#0B0E11",
     },
     {
         id: "sage",
         name: "Sage",
         description: "Calming sage green with natural, organic essence",
+        fullDescription: "Inspired by natural herb gardens, sage green brings calm and harmony to spaces. A perfect blend of nature and modern design.",
         image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500&h=500&fit=crop",
         backgroundImage: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&h=800&fit=crop",
         tint: "bg-emerald-50",
+        colorCode: "#6B8E23",
     },
     {
         id: "ivory",
         name: "Ivory",
         description: "Creamy ivory with timeless elegance and warmth",
+        fullDescription: "A timeless classic that never goes out of style. Ivory brings light and spaciousness while maintaining sophisticated warmth.",
         image: "https://images.unsplash.com/photo-1567521464027-f127ff144326?w=500&h=500&fit=crop",
         backgroundImage: "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1200&h=800&fit=crop",
         tint: "bg-amber-50",
+        colorCode: "#FFFFF0",
     },
 ]
 
@@ -110,23 +122,49 @@ export function MaterialsSection() {
             <div className="absolute top-[120px] left-0 right-0 z-10">
                 <div className="container-custom text-white">
                     <Reveal>
-                        <div>
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <div className="lg:col-span-2">
+                                <AnimatePresence mode="wait">
+                                    <motion.h2
+                                        key={activeMaterial}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                                        className="font-bold mb-6 text-7xl"
+                                    >
+                                        <AnimatedText text={activeMaterialData.name} delay={0.2} />
+                                    </motion.h2>
+                                </AnimatePresence>
+                                <AnimatePresence mode="wait">
+                                    <motion.p
+                                        key={`desc-${activeMaterial}`}
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -10 }}
+                                        transition={{ duration: 0.3 }}
+                                        className="text-lg text-white/90 leading-relaxed max-w-2xl"
+                                    >
+                                        {activeMaterialData.description}
+                                    </motion.p>
+                                </AnimatePresence>
+                            </div>
+
                             <AnimatePresence mode="wait">
-                                <motion.h2
-                                    key={activeMaterial}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -20 }}
-                                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                                    className="font-bold mb-6 text-7xl"
+                                <motion.div
+                                    key={`card-${activeMaterial}`}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: -20 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="lg:col-span-1 bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 h-fit"
                                 >
-                                    <AnimatedText text={activeMaterialData.name} delay={0.2} />
-                                </motion.h2>
+                                    <h3 className="text-sm font-semibold text-white/70 uppercase tracking-wider mb-4">Material Details</h3>
+                                    <p className="text-sm text-white/80 leading-relaxed">
+                                        {activeMaterialData.fullDescription}
+                                    </p>
+                                </motion.div>
                             </AnimatePresence>
-                            <p className="text-lg text-white/90 leading-relaxed max-w-2xl">
-                                Every piece begins with the finest materials, carefully selected for their beauty, durability, and
-                                sustainable origins. Our craftspeople honor traditional techniques while embracing modern precision.
-                            </p>
                         </div>
                     </Reveal>
                 </div>

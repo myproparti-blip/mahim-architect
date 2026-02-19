@@ -1,10 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import Image from "next/image"
-import { ChevronLeft, ChevronRight, X } from "lucide-react"
+import { ChevronLeft, ChevronRight, X, Filter } from "lucide-react"
 
 interface Property {
   id: number
@@ -635,7 +635,7 @@ const DEMO_PROPERTIES: Property[] = [
   {
     id: 47,
     name: "Furniture",
-    category: "",
+    category: "Furniture Design",
     location: "",
     surfaceArea: "",
     thumbnail: "/images/portfolio/d3 - Copy.jpg",
@@ -747,166 +747,303 @@ const DEMO_PROPERTIES: Property[] = [
 export default function PortfolioPage() {
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [activeCategory, setActiveCategory] = useState<string>("All")
+  const [isAutoSliding, setIsAutoSliding] = useState(true)
+
+  // Extract unique categories
+  const categories = useMemo(() => {
+    const cats = new Set<string>()
+    DEMO_PROPERTIES.forEach((prop) => {
+      prop.category.split(",").forEach((cat) => {
+        cats.add(cat.trim())
+      })
+    })
+    return ["All", ...Array.from(cats).sort()]
+  }, [])
+
+  // Filter properties by category
+  const filteredProperties = useMemo(() => {
+    if (activeCategory === "All") return DEMO_PROPERTIES
+    return DEMO_PROPERTIES.filter((prop) =>
+      prop.category.split(",").some((cat) => cat.trim() === activeCategory)
+    )
+  }, [activeCategory])
+
+  // Auto-slide images
+  useEffect(() => {
+    if (!selectedProperty || !isAutoSliding || selectedProperty.images.length <= 1) {
+      return
+    }
+
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prev) =>
+        prev === selectedProperty.images.length - 1 ? 0 : prev + 1
+      )
+    }, 4000) // 4 seconds per slide
+
+    return () => clearInterval(timer)
+  }, [selectedProperty, isAutoSliding])
 
   const handlePrevImage = () => {
+    setIsAutoSliding(false)
     if (selectedProperty) {
       setCurrentImageIndex((prev) =>
         prev === 0 ? selectedProperty.images.length - 1 : prev - 1
       )
     }
+    // Resume auto-slide after 10 seconds
+    setTimeout(() => setIsAutoSliding(true), 10000)
   }
 
   const handleNextImage = () => {
+    setIsAutoSliding(false)
     if (selectedProperty) {
       setCurrentImageIndex((prev) =>
         prev === selectedProperty.images.length - 1 ? 0 : prev + 1
       )
     }
+    // Resume auto-slide after 10 seconds
+    setTimeout(() => setIsAutoSliding(true), 10000)
+  }
+
+  const handleThumbnailClick = (index: number) => {
+    setIsAutoSliding(false)
+    setCurrentImageIndex(index)
+    // Resume auto-slide after 10 seconds
+    setTimeout(() => setIsAutoSliding(true), 10000)
   }
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-gray-100">
       <Header />
       
-      <section className="pt-32 pb-20 px-4 max-w-7xl mx-auto">
-        <h1 className="text-5xl font-bold mb-2">Portfolio</h1>
-        <p className="text-gray-600 mb-12">Explore our exceptional real estate projects</p>
+      <section className="pt-40 pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        {/* Header Section */}
+        <div className="mb-20">
+          <div className="space-y-4 mb-10">
+            <div className="inline-block">
+              <span className="text-xs font-bold uppercase tracking-widest text-gray-600 bg-gray-100 px-4 py-2 rounded-full">Our Work</span>
+            </div>
+            <h1 className="text-7xl sm:text-8xl font-bold text-gray-900 tracking-tighter leading-tight">
+              Architectural <br /> Excellence
+            </h1>
+            <div className="w-32 h-1.5 bg-gradient-to-r from-black via-gray-800 to-transparent mt-6"></div>
+          </div>
+          <p className="text-lg text-gray-600 max-w-3xl leading-relaxed">
+            Award-winning design and architecture across residential, commercial, and institutional spaces. Each project represents our commitment to innovation, sustainability, and timeless elegance.
+          </p>
+        </div>
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-          {DEMO_PROPERTIES.map((property) => (
+        {/* Category Filter - Premium */}
+        <div className="mb-16">
+          <div className="flex items-center gap-3 mb-6">
+            <Filter size={18} className="text-gray-600" />
+            <span className="text-sm font-semibold uppercase tracking-wider text-gray-700">Filter by Category</span>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`px-6 py-2.5 rounded-full font-medium text-sm transition-all duration-300 ${
+                  activeCategory === category
+                    ? "bg-black text-white shadow-lg scale-105"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-md"
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+          <p className="text-xs text-gray-500 mt-4">
+            Showing {filteredProperties.length} of {DEMO_PROPERTIES.length} projects
+          </p>
+        </div>
+
+        {/* Gallery Grid - Modern Masonry */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-max">
+          {filteredProperties.map((property) => (
             <div
               key={property.id}
               onClick={() => {
                 setSelectedProperty(property)
                 setCurrentImageIndex(0)
               }}
-              className="cursor-pointer group overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+              className="group cursor-pointer h-full"
             >
-              <div className="relative h-48 w-full overflow-hidden bg-gray-200">
+              <div className="relative h-64 sm:h-72 w-full overflow-hidden rounded-xl bg-gray-200 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
                 <Image
                   src={property.thumbnail}
                   alt={property.name}
                   fill
                   priority={false}
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                 />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
               </div>
-              <div className="p-3 bg-white">
-                <h3 className="font-semibold text-sm truncate">{property.name}</h3>
-                <p className="text-xs text-gray-500">{property.category}</p>
+              <div className="pt-5">
+                <h3 className="font-semibold text-gray-900 text-base group-hover:text-black transition-colors line-clamp-2">{property.name}</h3>
+                <p className="text-sm text-gray-500 mt-1 group-hover:text-gray-700 transition-colors line-clamp-1">{property.category}</p>
+                <p className="text-xs text-gray-400 mt-2">{property.location}</p>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Modal Detail View */}
+      {/* Modal Detail View - Modern Fullscreen */}
       {selectedProperty && (
-        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg max-w-5xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
+          <div className="bg-white rounded-2xl max-w-6xl w-full max-h-[95vh] overflow-hidden shadow-2xl flex flex-col animate-in zoom-in-95 duration-300">
             {/* Close Button */}
             <button
               onClick={() => setSelectedProperty(null)}
-              className="absolute top-4 right-4 p-2 bg-white rounded-full hover:bg-gray-100 z-10"
+              className="absolute top-6 right-6 p-2.5 bg-white/90 hover:bg-white rounded-full hover:shadow-lg transition-all duration-200 z-10 group"
             >
-              <X size={24} />
+              <X size={24} className="text-gray-900 group-hover:rotate-90 transition-transform duration-300" />
             </button>
 
-            <div className="flex flex-col lg:flex-row gap-6 p-6">
-              {/* Main Image */}
+            <div className="flex flex-col lg:flex-row gap-10 p-10 overflow-y-auto flex-1">
+              {/* Main Image Section */}
               <div className="flex-1 min-w-0">
-                <div className="relative h-96 w-full bg-gray-200 rounded-lg overflow-hidden mb-4">
-                  <Image
-                    src={selectedProperty.images[currentImageIndex]}
-                    alt={`${selectedProperty.name} - Image ${currentImageIndex + 1}`}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-
-                {/* Image Navigation */}
-                <div className="flex gap-2 items-center justify-between">
-                  <button
-                    onClick={handlePrevImage}
-                    className="p-2 bg-gray-200 hover:bg-gray-300 rounded-full transition"
-                  >
-                    <ChevronLeft size={20} />
-                  </button>
-                  
-                  <div className="flex gap-2 overflow-x-auto">
-                    {selectedProperty.images.map((image, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setCurrentImageIndex(index)}
-                        className={`flex-shrink-0 h-16 w-16 rounded-lg overflow-hidden border-2 transition ${
-                          index === currentImageIndex ? "border-black" : "border-gray-300"
-                        }`}
-                      >
-                        <Image
-                          src={image}
-                          alt={`Thumbnail ${index + 1}`}
-                          width={64}
-                          height={64}
-                          className="w-full h-full object-cover"
-                        />
-                      </button>
-                    ))}
+                <div className="sticky top-8 space-y-6">
+                  {/* Main Image with Badge */}
+                  <div>
+                    <div className="absolute top-12 left-10 z-20">
+                      <span className="text-xs font-bold uppercase tracking-widest text-white bg-black/70 backdrop-blur-sm px-4 py-2 rounded-full">
+                        {selectedProperty.category.split(",")[0].trim()}
+                      </span>
+                    </div>
+                    <div className="relative h-96 sm:h-[520px] w-full bg-gray-200 rounded-2xl overflow-hidden shadow-2xl">
+                      <Image
+                        src={selectedProperty.images[currentImageIndex]}
+                        alt={`${selectedProperty.name} - Image ${currentImageIndex + 1}`}
+                        fill
+                        priority
+                        className="object-cover transition-all duration-500"
+                      />
+                    </div>
                   </div>
 
-                  <button
-                    onClick={handleNextImage}
-                    className="p-2 bg-gray-200 hover:bg-gray-300 rounded-full transition"
-                  >
-                    <ChevronRight size={20} />
-                  </button>
+                  {/* Image Navigation */}
+                  {selectedProperty.images.length > 1 && (
+                    <div className="space-y-4">
+                      {/* Thumbnail Grid */}
+                      <div className="flex gap-3 overflow-x-auto pb-2">
+                        {selectedProperty.images.map((image, index) => (
+                          <button
+                            key={index}
+                            onClick={() => handleThumbnailClick(index)}
+                            className={`flex-shrink-0 h-24 w-24 rounded-xl overflow-hidden border-2 transition-all duration-300 hover:shadow-lg ${
+                              index === currentImageIndex ? "border-black shadow-lg scale-110" : "border-gray-300 hover:border-gray-400 opacity-60 hover:opacity-100"
+                            }`}
+                          >
+                            <Image
+                              src={image}
+                              alt={`Thumbnail ${index + 1}`}
+                              width={96}
+                              height={96}
+                              className="w-full h-full object-cover"
+                            />
+                          </button>
+                        ))}
+                      </div>
+
+                      {/* Navigation Buttons & Auto-Slide Indicator */}
+                      <div className="flex justify-between items-center">
+                        <button
+                          onClick={handlePrevImage}
+                          className="p-3 bg-gray-100 hover:bg-gray-200 rounded-full transition-all duration-200 hover:shadow-md hover:scale-110"
+                        >
+                          <ChevronLeft size={22} className="text-gray-900" />
+                        </button>
+                        
+                        <div className="text-center flex flex-col items-center gap-2">
+                          <span className="text-xs font-semibold text-gray-600">
+                            {currentImageIndex + 1} / {selectedProperty.images.length}
+                          </span>
+                          {isAutoSliding && selectedProperty.images.length > 1 && (
+                            <div className="flex gap-1">
+                              {selectedProperty.images.map((_, idx) => (
+                                <div
+                                  key={idx}
+                                  className={`h-1.5 rounded-full transition-all duration-500 ${
+                                    idx === currentImageIndex ? "w-6 bg-black" : "w-1.5 bg-gray-300"
+                                  }`}
+                                />
+                              ))}
+                            </div>
+                          )}
+                        </div>
+
+                        <button
+                          onClick={handleNextImage}
+                          className="p-3 bg-gray-100 hover:bg-gray-200 rounded-full transition-all duration-200 hover:shadow-md hover:scale-110"
+                        >
+                          <ChevronRight size={22} className="text-gray-900" />
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 
               {/* Project Details */}
-              <div className="flex-1 min-w-0">
-                <h2 className="text-3xl font-bold mb-2">{selectedProperty.name}</h2>
-                
-                <div className="border-t border-b border-gray-200 py-4 mb-6">
-                  <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">Project Info:</h3>
+              <div className="flex-1 min-w-0 flex flex-col justify-between">
+                {/* Content */}
+                <div>
+                  {/* Title and Category */}
+                  <div className="mb-12">
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                      <h2 className="text-5xl font-bold text-gray-900 leading-tight">{selectedProperty.name}</h2>
+                    </div>
+                    <div className="w-16 h-1.5 bg-gradient-to-r from-black to-transparent"></div>
+                  </div>
                   
-                  <div className="space-y-3 text-sm">
-                    <div>
-                      <p className="font-semibold">Category</p>
-                      <p className="text-gray-600">{selectedProperty.category}</p>
-                    </div>
+                  {/* Project Info Grid */}
+                  <div className="mb-12">
+                    <h3 className="text-xs font-bold text-gray-700 uppercase tracking-widest mb-6">Project Details</h3>
                     
-                    <div>
-                      <p className="font-semibold">Location</p>
-                      <p className="text-gray-600">{selectedProperty.location}</p>
-                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+                      <div>
+                        <p className="text-xs text-gray-500 font-medium uppercase tracking-wider mb-2">Location</p>
+                        <p className="text-lg text-gray-900 font-semibold">{selectedProperty.location}</p>
+                      </div>
+                      
+                      {selectedProperty.client && (
+                        <div>
+                          <p className="text-xs text-gray-500 font-medium uppercase tracking-wider mb-2">Client</p>
+                          <p className="text-lg text-gray-900 font-semibold">{selectedProperty.client}</p>
+                        </div>
+                      )}
+                      
+                      {selectedProperty.surfaceArea && (
+                        <div>
+                          <p className="text-xs text-gray-500 font-medium uppercase tracking-wider mb-2">Surface Area</p>
+                          <p className="text-lg text-gray-900 font-semibold">{selectedProperty.surfaceArea}</p>
+                        </div>
+                      )}
 
-                    {selectedProperty.client && (
                       <div>
-                        <p className="font-semibold">Client</p>
-                        <p className="text-gray-600">{selectedProperty.client}</p>
+                        <p className="text-xs text-gray-500 font-medium uppercase tracking-wider mb-2">Category</p>
+                        <p className="text-lg text-gray-900 font-semibold">{selectedProperty.category}</p>
                       </div>
-                    )}
-                    
-                    {selectedProperty.surfaceArea && (
-                      <div>
-                        <p className="font-semibold">Surface Area</p>
-                        <p className="text-gray-600">{selectedProperty.surfaceArea}</p>
-                      </div>
-                    )}
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <div className="mb-12 pb-8 border-b border-gray-200">
+                    <h3 className="text-xs font-bold text-gray-700 uppercase tracking-widest mb-4">About This Project</h3>
+                    <p className="text-gray-700 leading-relaxed text-base">{selectedProperty.description}</p>
                   </div>
                 </div>
 
-                <div>
-                  <h3 className="text-sm font-semibold text-gray-500 uppercase mb-3">Description</h3>
-                  <p className="text-gray-700 leading-relaxed">{selectedProperty.description}</p>
-                </div>
-
+                {/* Close Button */}
                 <button
                   onClick={() => setSelectedProperty(null)}
-                  className="mt-6 w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition font-semibold"
+                  className="w-full bg-black text-white py-4 rounded-xl hover:shadow-xl transition-all duration-300 font-semibold hover:bg-gray-900 text-base"
                 >
-                  Close
+                  Close Project
                 </button>
               </div>
             </div>

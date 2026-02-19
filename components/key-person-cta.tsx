@@ -46,7 +46,7 @@ export function KeyPersonCTA() {
             <Button
               onClick={() => setShowContact(!showContact)}
               variant="outline"
-              className="border-white text-white hover:bg-white/10 px-8 py-6 text-lg rounded-lg group"
+              className="border-white text-black hover:bg-white/10 px-8 py-6 text-lg rounded-lg group"
             >
               Contact Information
             </Button>

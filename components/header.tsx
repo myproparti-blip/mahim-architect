@@ -8,7 +8,6 @@ import { ChevronDown, BookOpen, Users, Handshake, Award, Briefcase, PenTool, Zap
 
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false)
-    const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false)
     const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false)
     const [connectDropdownOpen, setConnectDropdownOpen] = useState(false)
 
@@ -25,12 +24,6 @@ export function Header() {
         { label: "VIRTUAL TOUR", href: "/virtual-tour", icon: Zap },
         { label: "PORTFOLIO", href: "/portfolio", icon: Briefcase },
         { label: "KEY PERSON", href: "/key-person", icon: Users },
-    ]
-
-    const aboutMenuItems = [
-        { label: "Welcome Message", href: "/welcome", description: "About Mahim Architect", icon: Home },
-        { label: "Design Strategy", href: "/design-strategy", description: "Design as strategy in action", icon: PenTool },
-        { label: "Professional Support", href: "/services", description: "Integrated services & expertise", icon: Briefcase },
     ]
 
     const servicesMenuItems = [
@@ -131,151 +124,27 @@ export function Header() {
                     </Link>
 
                     {/* About Us Dropdown */}
-                    <div className="relative">
-                        <motion.button
-                            onClick={() => setAboutDropdownOpen(!aboutDropdownOpen)}
-                            className="text-xs lg:text-sm font-semibold text-gray-300 hover:text-amber-400 transition-colors duration-300 relative group whitespace-nowrap flex items-center gap-2"
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0, duration: 0.4 }}
-                            whileHover={{ y: -1 }}
-                        >
-                            ABOUT US
-                            <motion.div
-                                animate={{ rotate: aboutDropdownOpen ? 180 : 0 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <ChevronDown size={16} />
-                            </motion.div>
+                    <Link href="/welcome">
+                         <motion.div
+                             className="text-xs lg:text-sm font-semibold text-gray-300 hover:text-amber-400 transition-colors duration-300 relative group whitespace-nowrap cursor-pointer"
+                             initial={{ opacity: 0, y: -10 }}
+                             animate={{ opacity: 1, y: 0 }}
+                             transition={{ delay: 0, duration: 0.4 }}
+                             whileHover={{ y: -1 }}
+                         >
+                             ABOUT US
 
-                            {/* Underline on hover */}
-                            <motion.div
-                                className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400/0 via-amber-400 to-amber-400/0"
-                                initial={{ opacity: 0, scaleX: 0 }}
-                                whileHover={{ opacity: 1, scaleX: 1 }}
-                                transition={{ duration: 0.3 }}
-                            />
-                        </motion.button>
+                             {/* Underline on hover */}
+                             <motion.div
+                                 className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400/0 via-amber-400 to-amber-400/0"
+                                 initial={{ opacity: 0, scaleX: 0 }}
+                                 whileHover={{ opacity: 1, scaleX: 1 }}
+                                 transition={{ duration: 0.3 }}
+                             />
+                         </motion.div>
+                     </Link>
 
-                        {/* Dropdown Menu */}
-                        <AnimatePresence>
-                            {aboutDropdownOpen && (
-                                <motion.div
-                                    className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-56 bg-black/95 backdrop-blur-xl border border-amber-500/30 rounded-2xl shadow-2xl overflow-hidden"
-                                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                                    transition={{ duration: 0.2 }}
-                                >
-                                    {aboutMenuItems.map((item, index) => {
-                                        const IconComponent = item.icon
-                                        return (
-                                            <Link key={item.label} href={item.href}>
-                                                <motion.div
-                                                    onClick={() => setAboutDropdownOpen(false)}
-                                                    className="flex items-start gap-4 px-6 py-3.5 text-sm text-gray-300 hover:bg-amber-500/15 transition-all duration-200 border-b border-amber-500/10 last:border-b-0 group cursor-pointer"
-                                                    initial={{ opacity: 0, x: -10 }}
-                                                    animate={{ opacity: 1, x: 0 }}
-                                                    transition={{ delay: index * 0.05, duration: 0.3 }}
-                                                    whileHover={{ x: 2 }}
-                                                >
-                                                    <motion.div
-                                                        className="text-amber-400 flex-shrink-0 mt-0.5"
-                                                        whileHover={{ scale: 1.2, rotate: 5 }}
-                                                        transition={{ duration: 0.3 }}
-                                                    >
-                                                        <IconComponent size={20} />
-                                                    </motion.div>
-                                                    <div className="flex-1 min-w-0">
-                                                        <div className="font-semibold text-gray-200 group-hover:text-amber-400 transition-colors">
-                                                            {item.label}
-                                                        </div>
-                                                        <div className="text-xs text-gray-500 group-hover:text-gray-400 transition-colors">
-                                                            {item.description}
-                                                        </div>
-                                                    </div>
-                                                </motion.div>
-                                            </Link>
-                                        )
-                                    })}
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </div>
-
-                    {/* Services Dropdown */}
-                    <div className="relative">
-                        <motion.button
-                            onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
-                            className="text-xs lg:text-sm font-semibold text-gray-300 hover:text-amber-400 transition-colors duration-300 relative group whitespace-nowrap flex items-center gap-2"
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.06, duration: 0.4 }}
-                            whileHover={{ y: -1 }}
-                        >
-                            ALL SERVICES
-                            <motion.div
-                                animate={{ rotate: servicesDropdownOpen ? 180 : 0 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <ChevronDown size={16} />
-                            </motion.div>
-
-                            {/* Underline on hover */}
-                            <motion.div
-                                className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400/0 via-amber-400 to-amber-400/0"
-                                initial={{ opacity: 0, scaleX: 0 }}
-                                whileHover={{ opacity: 1, scaleX: 1 }}
-                                transition={{ duration: 0.3 }}
-                            />
-                        </motion.button>
-
-                        {/* Dropdown Menu */}
-                        <AnimatePresence>
-                            {servicesDropdownOpen && (
-                                <motion.div
-                                    className="absolute top-full left-1/2 -translate-x-1/2 mt-4 bg-black/95 backdrop-blur-xl border border-amber-500/30 rounded-2xl shadow-2xl overflow-hidden"
-                                    style={{ width: "520px" }}
-                                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                                    transition={{ duration: 0.2 }}
-                                >
-                                    <div className="grid grid-cols-2">
-                                        {servicesMenuItems.map((item, index) => {
-                                            const IconComponent = item.icon
-                                            return (
-                                                <motion.a
-                                                    key={item.label}
-                                                    href={item.href}
-                                                    onClick={() => setServicesDropdownOpen(false)}
-                                                    className="flex items-center gap-2 px-3 py-2 text-sm text-gray-300 hover:bg-amber-500/20 transition-all duration-200 border-b border-r border-amber-500/10 last:border-b-0 group"
-                                                    style={{
-                                                        borderRightWidth: (index + 1) % 2 === 0 ? "0px" : "1px",
-                                                    }}
-                                                    initial={{ opacity: 0, x: -10 }}
-                                                    animate={{ opacity: 1, x: 0 }}
-                                                    transition={{ delay: index * 0.02, duration: 0.3 }}
-                                                    whileHover={{ x: 2 }}
-                                                >
-                                                    <motion.div
-                                                        className="text-amber-400 flex-shrink-0"
-                                                        whileHover={{ scale: 1.2 }}
-                                                        transition={{ duration: 0.3 }}
-                                                    >
-                                                        <IconComponent size={16} />
-                                                    </motion.div>
-                                                    <div className="font-medium text-gray-200 group-hover:text-amber-400 transition-colors truncate">
-                                                        {item.label}
-                                                    </div>
-                                                </motion.a>
-                                            )
-                                        })}
-                                    </div>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </div>
+                   
 
                     {/* Regular Nav Items */}
                     {navItems.map((item, index) => (

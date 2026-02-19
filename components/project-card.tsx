@@ -22,89 +22,114 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, onQuickLook }: ProjectCardProps) {
     return (
-        <div className="group relative bg-white overflow-hidden rounded-lg border border-neutral-200/80 hover:border-neutral-300 transition-all duration-500 hover:shadow-2xl">
+        <motion.div
+            className="group relative bg-white overflow-hidden rounded-2xl border border-neutral-200/50 hover:border-neutral-300/80 transition-all duration-500 hover:shadow-2xl flex flex-col h-full"
+            whileHover={{ y: -8 }}
+        >
             {/* Badge */}
             {project.badge && (
-                <div className="absolute top-3 left-3 z-20">
-                    <span
+                <div className="absolute top-4 left-4 z-20">
+                    <motion.span
                         className={cn(
-                            "px-2.5 py-1 text-xs font-semibold rounded-full backdrop-blur-sm inline-block",
+                            "px-3 py-1.5 text-xs font-bold rounded-full backdrop-blur-md inline-block shadow-lg uppercase tracking-wider",
                             project.badge === "New" && "bg-emerald-500/95 text-white",
                             project.badge === "Back in stock" && "bg-blue-500/95 text-white",
                             project.badge === "Limited" && "bg-amber-500/95 text-white",
                         )}
+                        whileHover={{ scale: 1.05 }}
                     >
                         {project.badge}
-                    </span>
+                    </motion.span>
                 </div>
             )}
 
             {/* Project Image Container */}
-            <div className="relative overflow-hidden bg-neutral-100" style={{ aspectRatio: "8/7" }}>
+            <div className="relative overflow-hidden bg-gradient-to-br from-neutral-100 to-neutral-200 flex-grow" style={{ aspectRatio: "8/7" }}>
                 <Image
                     src={project.image}
                     alt={project.name}
                     fill
-                    className="object-cover group-hover:scale-103 transition-transform duration-700 ease-out"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     priority
                 />
 
                 {/* Overlay on Hover */}
-                <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-4">
-                    <button
-                        className="p-2.5 bg-white rounded-full text-neutral-900 hover:bg-amber-500 hover:text-white transition-all duration-300 transform hover:scale-110 shadow-lg"
+                <motion.div
+                    className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-4 backdrop-blur-xs"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                >
+                    <motion.button
+                        className="p-3 bg-white rounded-full text-neutral-900 hover:bg-amber-500 hover:text-white transition-all duration-300 shadow-lg border-2 border-white/20"
                         onClick={() => onQuickLook(project)}
                         aria-label="Quick look"
+                        whileHover={{ scale: 1.15, rotate: 5 }}
+                        whileTap={{ scale: 0.9 }}
                     >
-                        <Eye size={18} />
-                    </button>
-                    <button
-                        className="p-2.5 bg-white rounded-full text-neutral-900 hover:bg-amber-500 hover:text-white transition-all duration-300 transform hover:scale-110 shadow-lg"
+                        <Eye size={20} />
+                    </motion.button>
+                    <motion.button
+                        className="p-3 bg-white rounded-full text-neutral-900 hover:bg-amber-500 hover:text-white transition-all duration-300 shadow-lg border-2 border-white/20"
                         aria-label="Share"
+                        whileHover={{ scale: 1.15, rotate: -5 }}
+                        whileTap={{ scale: 0.9 }}
                     >
-                        <Share2 size={18} />
-                    </button>
-                </div>
+                        <Share2 size={20} />
+                    </motion.button>
+                </motion.div>
             </div>
 
             {/* Project Info */}
-            <div className="p-3.5 bg-white space-y-2.5">
-                <div className="space-y-1">
-                    <h3 className="text-sm font-semibold text-neutral-900 group-hover:text-amber-600 transition-colors duration-300 line-clamp-1">
+            <div className="p-5 bg-white space-y-4 flex-shrink-0">
+                <div className="space-y-2">
+                    <h3 className="text-base font-bold text-neutral-900 group-hover:text-amber-600 transition-colors duration-300 line-clamp-2">
                         {project.name}
                     </h3>
-                    <p className="text-xs text-neutral-500 font-normal line-clamp-1">{project.materials.join(" • ")}</p>
+                    <p className="text-xs text-neutral-500 font-medium line-clamp-2">{project.materials.join(" • ")}</p>
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between pt-2 border-t border-neutral-100">
                     {/* Status */}
-                    <div className="flex items-center gap-1.5">
-                        <div className="w-1 h-1 rounded-full bg-amber-500"></div>
-                        <span className="text-xs font-medium text-neutral-700">{project.price}</span>
+                    <div className="flex items-center gap-2">
+                        <motion.div
+                            className="w-2.5 h-2.5 rounded-full bg-amber-500"
+                            animate={{ scale: [1, 1.2, 1] }}
+                            transition={{ repeat: Infinity, duration: 2 }}
+                        ></motion.div>
+                        <span className="text-xs font-semibold text-neutral-700 uppercase tracking-wide">{project.price}</span>
                     </div>
 
                     {/* Color Swatches */}
-                    <div className="flex gap-1.5">
-                        {project.swatches.slice(0, 2).map((swatch) => (
-                            <div
+                    <div className="flex gap-2.5">
+                        {project.swatches.slice(0, 2).map((swatch, idx) => (
+                            <motion.div
                                 key={swatch.name}
-                                className="w-3.5 h-3.5 rounded-full border border-neutral-300 cursor-pointer hover:border-neutral-500 transition-all hover:scale-110"
+                                className="w-4 h-4 rounded-lg border-2 border-neutral-300 cursor-pointer transition-all hover:border-amber-500 hover:shadow-md"
                                 style={{ backgroundColor: swatch.color }}
                                 title={swatch.name}
+                                whileHover={{ scale: 1.2 }}
+                                whileTap={{ scale: 0.9 }}
                             />
                         ))}
+                        {project.swatches.length > 2 && (
+                            <div className="w-4 h-4 rounded-lg bg-gradient-to-br from-neutral-300 to-neutral-400 flex items-center justify-center text-[8px] font-bold text-white cursor-pointer hover:shadow-md" title={`+${project.swatches.length - 2} more`}>
+                                +
+                            </div>
+                        )}
                     </div>
                 </div>
 
                 {/* CTA Button */}
-                <button
-                    className="w-full py-2 bg-neutral-900 hover:bg-amber-600 text-white font-semibold text-xs rounded-md transition-all duration-300 hover:shadow-md active:scale-95"
+                <motion.button
+                    className="w-full py-2.5 bg-gradient-to-r from-neutral-900 to-neutral-800 hover:from-amber-600 hover:to-amber-700 text-white font-bold text-xs rounded-lg transition-all duration-300 hover:shadow-lg uppercase tracking-wider active:scale-95 mt-2"
                     onClick={() => onQuickLook(project)}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.95 }}
                 >
                     View Details
-                </button>
+                </motion.button>
             </div>
-        </div>
+        </motion.div>
     )
 }
