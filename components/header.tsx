@@ -10,6 +10,7 @@ export function Header() {
     const [isScrolled, setIsScrolled] = useState(false)
     const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false)
     const [connectDropdownOpen, setConnectDropdownOpen] = useState(false)
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
     useEffect(() => {
         const handleScroll = () => {
@@ -125,26 +126,26 @@ export function Header() {
 
                     {/* About Us Dropdown */}
                     <Link href="/welcome">
-                         <motion.div
-                             className="text-xs lg:text-sm font-semibold text-gray-300 hover:text-amber-400 transition-colors duration-300 relative group whitespace-nowrap cursor-pointer"
-                             initial={{ opacity: 0, y: -10 }}
-                             animate={{ opacity: 1, y: 0 }}
-                             transition={{ delay: 0, duration: 0.4 }}
-                             whileHover={{ y: -1 }}
-                         >
-                             ABOUT US
+                        <motion.div
+                            className="text-xs lg:text-sm font-semibold text-gray-300 hover:text-amber-400 transition-colors duration-300 relative group whitespace-nowrap cursor-pointer"
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0, duration: 0.4 }}
+                            whileHover={{ y: -1 }}
+                        >
+                            ABOUT US
 
-                             {/* Underline on hover */}
-                             <motion.div
-                                 className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400/0 via-amber-400 to-amber-400/0"
-                                 initial={{ opacity: 0, scaleX: 0 }}
-                                 whileHover={{ opacity: 1, scaleX: 1 }}
-                                 transition={{ duration: 0.3 }}
-                             />
-                         </motion.div>
-                     </Link>
+                            {/* Underline on hover */}
+                            <motion.div
+                                className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400/0 via-amber-400 to-amber-400/0"
+                                initial={{ opacity: 0, scaleX: 0 }}
+                                whileHover={{ opacity: 1, scaleX: 1 }}
+                                transition={{ duration: 0.3 }}
+                            />
+                        </motion.div>
+                    </Link>
 
-                   
+
 
                     {/* Regular Nav Items */}
                     {navItems.map((item, index) => (
@@ -233,16 +234,94 @@ export function Header() {
                     </AnimatePresence>
                 </div>
 
+                {/* Mobile Branding Text */}
+                <div className="md:hidden flex items-center gap-2">
+                    <motion.div
+                        className="flex items-center gap-2"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        {/* Two vertical bars */}
+                        <div className="flex gap-0.5">
+                            <div className="w-0.5 h-2 bg-amber-400 rounded-sm" />
+                            <div className="w-0.5 h-3 bg-amber-400 rounded-sm" />
+                        </div>
+                        {/* Text */}
+                        <span className="text-amber-400 font-serif font-bold text-xs">
+                            Mahim Architect
+                        </span>
+                    </motion.div>
+                </div>
+
                 {/* Mobile menu button */}
                 <motion.button
-                    className="md:hidden flex flex-col gap-1 w-6 h-6 justify-center absolute right-6"
+                    className="md:hidden flex flex-col gap-1 w-6 h-6 justify-center"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
+                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 >
-                    <motion.div className="w-5 h-0.5 bg-amber-400 rounded-full" />
-                    <motion.div className="w-4 h-0.5 bg-gray-400 rounded-full" />
-                    <motion.div className="w-5 h-0.5 bg-amber-400 rounded-full" />
+                    <motion.div
+                        className="w-5 h-0.5 bg-amber-400 rounded-full transition-all"
+                        animate={mobileMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+                    />
+                    <motion.div
+                        className="w-4 h-0.5 bg-gray-400 rounded-full transition-all"
+                        animate={mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+                    />
+                    <motion.div
+                        className="w-5 h-0.5 bg-amber-400 rounded-full transition-all"
+                        animate={mobileMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+                    />
                 </motion.button>
+
+                {/* Mobile Menu */}
+                <AnimatePresence>
+                    {mobileMenuOpen && (
+                        <motion.div
+                            className="absolute top-full left-4 right-4 mt-4 bg-black/95 backdrop-blur-xl border border-amber-500/30 rounded-2xl shadow-2xl overflow-hidden md:hidden"
+                            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                            transition={{ duration: 0.2 }}
+                        >
+                            <div className="p-4 max-h-96 overflow-y-auto">
+                                <Link href="/" onClick={() => setMobileMenuOpen(false)}>
+                                    <motion.div className="px-4 py-3 text-sm font-semibold text-gray-300 hover:text-amber-400 hover:bg-amber-500/15 rounded-lg transition-colors">
+                                        HOME
+                                    </motion.div>
+                                </Link>
+                                <Link href="/welcome" onClick={() => setMobileMenuOpen(false)}>
+                                    <motion.div className="px-4 py-3 text-sm font-semibold text-gray-300 hover:text-amber-400 hover:bg-amber-500/15 rounded-lg transition-colors">
+                                        ABOUT US
+                                    </motion.div>
+                                </Link>
+                                {navItems.map((item) => (
+                                    <Link key={item.label} href={item.href} onClick={() => setMobileMenuOpen(false)}>
+                                        <motion.div className="px-4 py-3 text-sm font-semibold text-gray-300 hover:text-amber-400 hover:bg-amber-500/15 rounded-lg transition-colors">
+                                            {item.label}
+                                        </motion.div>
+                                    </Link>
+                                ))}
+                                <div className="border-t border-amber-500/20 my-2" />
+                                {connectMenuItems.map((item) => (
+                                    <a
+                                        key={item.label}
+                                        href={item.href}
+                                        target={item.label !== "Email" ? "_blank" : undefined}
+                                        rel={item.label !== "Email" ? "noopener noreferrer" : undefined}
+                                        onClick={() => setMobileMenuOpen(false)}
+                                        className="block"
+                                    >
+                                        <motion.div className="px-4 py-3 text-sm font-semibold text-gray-300 hover:text-amber-400 hover:bg-amber-500/15 rounded-lg transition-colors">
+                                            {item.label}
+                                        </motion.div>
+                                    </a>
+                                ))}
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
         </motion.header>
     )
