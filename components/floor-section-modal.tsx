@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { X } from "lucide-react"
+import { X, ArrowLeft } from "lucide-react"
 import { useState } from "react"
 import { PanoramaViewer } from "./panorama-viewer"
 
@@ -43,9 +43,10 @@ export function FloorSectionModal({ isOpen, onClose, project }: FloorSectionModa
           <div className="w-full max-w-6xl px-8">
             <button
               onClick={() => setSelectedSection(null)}
-              className="mb-6 px-4 py-2 bg-neutral-200 hover:bg-neutral-300 rounded-lg transition-all"
+              className="mb-6 flex items-center gap-2 text-amber-600 hover:text-amber-700 font-semibold transition-colors"
             >
-              ← Back
+              <ArrowLeft size={20} />
+              Back
             </button>
             <h2 className="text-3xl font-bold text-neutral-900 mb-6 text-center">{selectedSection.title}</h2>
             <PanoramaViewer imageUrl={selectedSection.image} title={selectedSection.title} />
@@ -54,12 +55,23 @@ export function FloorSectionModal({ isOpen, onClose, project }: FloorSectionModa
       ) : (
         // Grid View
         <div className="w-full h-full overflow-y-auto flex items-start justify-center pt-20 pb-8">
-          <div className="w-full max-w-6xl">
+          <div className="w-full max-w-6xl px-8">
+            {/* Back Button */}
+            <button
+              onClick={() => {
+                setSelectedSection(null)
+                onClose()
+              }}
+              className="mb-8 flex items-center gap-2 text-amber-600 hover:text-amber-700 font-semibold transition-colors"
+            >
+              <ArrowLeft size={20} />
+              Back
+            </button>
             {/* Title */}
             <h2 className="text-3xl font-bold text-neutral-900 mb-8 text-center">{project.title}</h2>
 
             {/* Floor Sections Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {project.floorSections.map((section, index) => (
                 <div
                   key={index}
