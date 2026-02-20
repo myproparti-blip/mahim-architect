@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { ChevronDown, BookOpen, Users, Handshake, Award, Briefcase, PenTool, Zap, Home, Mail, MessageCircle, Instagram } from "lucide-react"
 
 export function Header() {
+    const pathname = usePathname()
     const [isScrolled, setIsScrolled] = useState(false)
     const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false)
     const [connectDropdownOpen, setConnectDropdownOpen] = useState(false)
@@ -106,7 +108,10 @@ export function Header() {
                     {/* Home Link */}
                     <Link href="/">
                         <motion.div
-                            className="text-xs lg:text-sm font-semibold text-gray-300 hover:text-amber-400 transition-colors duration-300 relative group whitespace-nowrap cursor-pointer"
+                            className={cn(
+                                "text-xs lg:text-sm font-semibold transition-colors duration-300 relative group whitespace-nowrap cursor-pointer",
+                                pathname === "/" ? "text-amber-400" : "text-gray-300 hover:text-amber-400"
+                            )}
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0, duration: 0.4 }}
@@ -114,20 +119,24 @@ export function Header() {
                         >
                             HOME
 
-                            {/* Underline on hover */}
+                            {/* Underline on active or hover */}
                             <motion.div
                                 className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400/0 via-amber-400 to-amber-400/0"
                                 initial={{ opacity: 0, scaleX: 0 }}
+                                animate={pathname === "/" ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
                                 whileHover={{ opacity: 1, scaleX: 1 }}
                                 transition={{ duration: 0.3 }}
                             />
                         </motion.div>
                     </Link>
 
-                    {/* About Us Dropdown */}
+                    {/* About Us Link */}
                     <Link href="/welcome">
                         <motion.div
-                            className="text-xs lg:text-sm font-semibold text-gray-300 hover:text-amber-400 transition-colors duration-300 relative group whitespace-nowrap cursor-pointer"
+                            className={cn(
+                                "text-xs lg:text-sm font-semibold transition-colors duration-300 relative group whitespace-nowrap cursor-pointer",
+                                pathname === "/welcome" ? "text-amber-400" : "text-gray-300 hover:text-amber-400"
+                            )}
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0, duration: 0.4 }}
@@ -135,10 +144,11 @@ export function Header() {
                         >
                             ABOUT US
 
-                            {/* Underline on hover */}
+                            {/* Underline on active or hover */}
                             <motion.div
                                 className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400/0 via-amber-400 to-amber-400/0"
                                 initial={{ opacity: 0, scaleX: 0 }}
+                                animate={pathname === "/welcome" ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
                                 whileHover={{ opacity: 1, scaleX: 1 }}
                                 transition={{ duration: 0.3 }}
                             />
@@ -151,7 +161,10 @@ export function Header() {
                     {navItems.map((item, index) => (
                         <Link key={item.label} href={item.href}>
                             <motion.div
-                                className="text-xs lg:text-sm font-semibold text-gray-300 hover:text-amber-400 transition-colors duration-300 relative group whitespace-nowrap cursor-pointer"
+                                className={cn(
+                                    "text-xs lg:text-sm font-semibold transition-colors duration-300 relative group whitespace-nowrap cursor-pointer",
+                                    pathname === item.href ? "text-amber-400" : "text-gray-300 hover:text-amber-400"
+                                )}
                                 initial={{ opacity: 0, y: -10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: (index + 2) * 0.06, duration: 0.4 }}
@@ -159,10 +172,11 @@ export function Header() {
                             >
                                 {item.label}
 
-                                {/* Underline on hover */}
+                                {/* Underline on active or hover */}
                                 <motion.div
                                     className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400/0 via-amber-400 to-amber-400/0"
                                     initial={{ opacity: 0, scaleX: 0 }}
+                                    animate={pathname === item.href ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
                                     whileHover={{ opacity: 1, scaleX: 1 }}
                                     transition={{ duration: 0.3 }}
                                 />
@@ -287,18 +301,33 @@ export function Header() {
                         >
                             <div className="p-4 max-h-96 overflow-y-auto">
                                 <Link href="/" onClick={() => setMobileMenuOpen(false)}>
-                                    <motion.div className="px-4 py-3 text-sm font-semibold text-gray-300 hover:text-amber-400 hover:bg-amber-500/15 rounded-lg transition-colors">
+                                    <motion.div className={cn(
+                                        "px-4 py-3 text-sm font-semibold rounded-lg transition-colors",
+                                        pathname === "/" 
+                                            ? "text-amber-400 bg-amber-500/15" 
+                                            : "text-gray-300 hover:text-amber-400 hover:bg-amber-500/15"
+                                    )}>
                                         HOME
                                     </motion.div>
                                 </Link>
                                 <Link href="/welcome" onClick={() => setMobileMenuOpen(false)}>
-                                    <motion.div className="px-4 py-3 text-sm font-semibold text-gray-300 hover:text-amber-400 hover:bg-amber-500/15 rounded-lg transition-colors">
+                                    <motion.div className={cn(
+                                        "px-4 py-3 text-sm font-semibold rounded-lg transition-colors",
+                                        pathname === "/welcome" 
+                                            ? "text-amber-400 bg-amber-500/15" 
+                                            : "text-gray-300 hover:text-amber-400 hover:bg-amber-500/15"
+                                    )}>
                                         ABOUT US
                                     </motion.div>
                                 </Link>
                                 {navItems.map((item) => (
                                     <Link key={item.label} href={item.href} onClick={() => setMobileMenuOpen(false)}>
-                                        <motion.div className="px-4 py-3 text-sm font-semibold text-gray-300 hover:text-amber-400 hover:bg-amber-500/15 rounded-lg transition-colors">
+                                        <motion.div className={cn(
+                                            "px-4 py-3 text-sm font-semibold rounded-lg transition-colors",
+                                            pathname === item.href 
+                                                ? "text-amber-400 bg-amber-500/15" 
+                                                : "text-gray-300 hover:text-amber-400 hover:bg-amber-500/15"
+                                        )}>
                                             {item.label}
                                         </motion.div>
                                     </Link>
