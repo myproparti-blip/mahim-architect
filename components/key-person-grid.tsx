@@ -31,7 +31,7 @@ const teamMembers = [
 
 export function KeyPersonGrid() {
   return (
-    <section className="py-24 lg:py-32 bg-gradient-to-b from-white to-neutral-50">
+    <section className="py-24 lg:py-22 bg-gradient-to-b from-white to-neutral-50">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <motion.div
@@ -65,7 +65,7 @@ export function KeyPersonGrid() {
           </motion.div>
         </div>
 
-        <Separator className="mb-16" />
+        <Separator className="mb-1" />
 
         {/* Team Grid */}
         <motion.div

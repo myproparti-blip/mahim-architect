@@ -50,7 +50,7 @@ export function VirtualTourCTA() {
             <Button
               onClick={handleWatchDemo}
               variant="outline"
-              className="border-white text-white hover:bg-white/10 px-8 py-6 text-lg rounded-lg group cursor-pointer"
+              className="border-white text-black hover:bg-white/10 px-8 py-6 text-lg rounded-lg group cursor-pointer"
             >
               <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
               Watch Demo

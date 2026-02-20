@@ -258,11 +258,11 @@ export function Header() {
                     >
                         {/* Two vertical bars */}
                         <div className="flex gap-0.5">
-                            <div className="w-0.5 h-2 bg-amber-400 rounded-sm" />
-                            <div className="w-0.5 h-3 bg-amber-400 rounded-sm" />
+                            <div className="w-0.5 h-2 bg-amber-500 rounded-sm" />
+                            <div className="w-0.5 h-3 bg-amber-500 rounded-sm" />
                         </div>
                         {/* Text */}
-                        <span className="text-amber-400 font-serif font-bold text-xs">
+                        <span className="text-amber-500 font-serif font-bold text-xs">
                             Mahim Architect
                         </span>
                     </motion.div>
@@ -276,15 +276,15 @@ export function Header() {
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 >
                     <motion.div
-                        className="w-5 h-0.5 bg-amber-400 rounded-full transition-all"
+                        className="w-5 h-0.5 bg-amber-500 rounded-full transition-all"
                         animate={mobileMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
                     />
                     <motion.div
-                        className="w-4 h-0.5 bg-gray-400 rounded-full transition-all"
+                        className="w-4 h-0.5 bg-amber-500 rounded-full transition-all"
                         animate={mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
                     />
                     <motion.div
-                        className="w-5 h-0.5 bg-amber-400 rounded-full transition-all"
+                        className="w-5 h-0.5 bg-amber-500 rounded-full transition-all"
                         animate={mobileMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
                     />
                 </motion.button>

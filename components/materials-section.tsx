@@ -8,49 +8,49 @@ import { cn } from "@/lib/utils"
 const materials = [
     {
         id: "pistachio",
-        name: "Pistachio",
-        description: "Luxurious pistachio green velvet with rich texture and depth",
-        fullDescription: "This stunning pistachio finish combines natural inspiration with modern sophistication. Perfect for creating warm, inviting spaces with a contemporary edge.",
-        image: "https://images.unsplash.com/photo-1578500494198-246f612d03b3?w=500&h=500&fit=crop",
-        backgroundImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop",
+        name: "Botanical",
+        description: "Natural green interior with warm architectural elements and contemporary styling",
+        fullDescription: "A sophisticated green palette that captures natural warmth and architectural elegance. Perfect for creating inviting living spaces with a modern, refined edge.",
+        image: "/images/homepageimges/cam_26_eve.jpg",
+        backgroundImage: "/images/homepageimges/cam_26_eve.jpg",
         tint: "bg-green-50",
         colorCode: "#9DC183",
     },
     {
         id: "lunar",
-        name: "Lunar",
-        description: "Sophisticated lunar gray with subtle metallic undertones",
-        fullDescription: "A refined gray tone inspired by moonlit elegance. This versatile finish brings sophistication to any architectural project with its understated metallic shimmer.",
-        image: "https://images.unsplash.com/photo-1585399572869-10e5e97ab0c4?w=500&h=500&fit=crop",
-        backgroundImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&h=800&fit=crop",
+        name: "Skyline",
+        description: "Contemporary twin-tower residential design with balanced symmetry and vertical elegance",
+        fullDescription: "A modern high-rise composition defined by clean vertical lines and harmonious proportions. The design integrates landscaped courtyards and green balconies to create a refined urban living experience that feels both structured and serene.",
+        image: "/images/homepageimges/03.jpg",
+        backgroundImage: "/images/homepageimges/03.jpg",
         tint: "bg-gray-100",
         colorCode: "#A9A9A9",
     },
     {
         id: "martian",
-        name: "Martian",
-        description: "Bold martian red with warm terracotta influences",
-        fullDescription: "Inspired by Martian landscapes, this bold red brings warmth and energy to any space. Combines earthy terracotta tones with modern design sensibilities.",
-        image: "https://images.unsplash.com/photo-1578500494198-246f612d03b3?w=500&h=500&fit=crop",
-        backgroundImage: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&h=800&fit=crop",
+        name: "Exhibition",
+        description: "Bold exhibition space with contemporary art installations and dynamic energy",
+        fullDescription: "A striking palette that brings vibrancy and movement to gallery and exhibition spaces. Creates a dramatic backdrop for showcasing art and innovative design.",
+        image: "/images/homepageimges/04-EXHIBITION-SPACE-INTERIOR1.jpg",
+        backgroundImage: "/images/homepageimges/04-EXHIBITION-SPACE-INTERIOR1.jpg",
         tint: "bg-red-50",
         colorCode: "#C41E3A",
     },
     {
         id: "obsidian",
-        name: "Obsidian",
-        description: "Deep obsidian black with sleek modern aesthetic",
-        fullDescription: "Pure, elegant darkness with a polished finish. Obsidian black creates dramatic contrast and timeless sophistication in contemporary architecture.",
-        image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&h=500&fit=crop",
-        backgroundImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=800&fit=crop",
+        name: "Elegant",
+        description: "Soft blue children’s bedroom with playful wall accents and contemporary minimal design",
+        fullDescription: "A calm pastel palette combined with clean-lined furniture creates a serene yet playful environment. Decorative wall graphics and soft textures add character, while natural light enhances the room’s airy and comfortable atmosphere.",
+        image: "/imgages/homepageimges/23.jpg",
+        backgroundImage: "/images/homepageimges/23.jpg",
         tint: "bg-gray-900",
         colorCode: "#0B0E11",
     },
     {
         id: "sage",
-        name: "Sage",
-        description: "Calming sage green with natural, organic essence",
-        fullDescription: "Inspired by natural herb gardens, sage green brings calm and harmony to spaces. A perfect blend of nature and modern design.",
+        name: "Resort",
+        description: "Luxury beachfront villa with warm timber architecture and resort-style outdoor living",
+        fullDescription: "A tropical-inspired residence defined by rich wooden textures, open verandas, and seamless indoor–outdoor flow. The infinity-edge pool and ocean-facing deck create a relaxed, resort-like atmosphere that blends comfort, craftsmanship, and coastal serenity.",
         image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500&h=500&fit=crop",
         backgroundImage: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&h=800&fit=crop",
         tint: "bg-emerald-50",
@@ -58,11 +58,11 @@ const materials = [
     },
     {
         id: "ivory",
-        name: "Ivory",
-        description: "Creamy ivory with timeless elegance and warmth",
-        fullDescription: "A timeless classic that never goes out of style. Ivory brings light and spaciousness while maintaining sophisticated warmth.",
-        image: "https://images.unsplash.com/photo-1567521464027-f127ff144326?w=500&h=500&fit=crop",
-        backgroundImage: "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1200&h=800&fit=crop",
+        name: "Villa",
+        description: "Modern waterfront residence with sculpted forms and tranquil landscape integration",
+        fullDescription: "A contemporary villa designed with clean geometric volumes and expansive glazing. The landscaped garden, wooden bridge & waterside pavilion create a peaceful retreat that balances modern sophistication .",
+        image: "/images/homepageimges/view-cop04_.jpg",
+        backgroundImage: "/images/homepageimges/view-cop04_.jpg",
         tint: "bg-amber-50",
         colorCode: "#FFFFF0",
     },
@@ -119,52 +119,52 @@ export function MaterialsSection() {
                 <div className="absolute inset-0 bg-black/30 sm:bg-black/20" />
             </div>
 
-            <div className="absolute top-[120px] left-0 right-0 z-10 px-4 sm:px-0">
+            <div className="absolute top-[40px] left-0 right-0 z-10 px-4 sm:px-0">
                 <div className="container-custom text-white">
                     <Reveal>
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                            <div className="lg:col-span-2">
-                                <AnimatePresence mode="wait">
-                                    <motion.h2
-                                        key={activeMaterial}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -20 }}
-                                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                                        className="font-bold mb-6 text-4xl sm:text-5xl lg:text-7xl"
-                                    >
-                                        <AnimatedText text={activeMaterialData.name} delay={0.2} />
-                                    </motion.h2>
-                                </AnimatePresence>
-                                <AnimatePresence mode="wait">
-                                    <motion.p
-                                        key={`desc-${activeMaterial}`}
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -10 }}
-                                        transition={{ duration: 0.3 }}
-                                        className="text-base sm:text-lg text-white/90 leading-relaxed max-w-2xl"
-                                    >
-                                        {activeMaterialData.description}
-                                    </motion.p>
-                                </AnimatePresence>
-                            </div>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+                            <div>
+                                 <AnimatePresence mode="wait">
+                                     <motion.h2
+                                         key={activeMaterial}
+                                         initial={{ opacity: 0, y: 20 }}
+                                         animate={{ opacity: 1, y: 0 }}
+                                         exit={{ opacity: 0, y: -20 }}
+                                         transition={{ duration: 0.3, ease: "easeInOut" }}
+                                         className="font-bold mb-4 text-4xl sm:text-5xl lg:text-6xl"
+                                     >
+                                         <AnimatedText text={activeMaterialData.name} delay={0.2} />
+                                     </motion.h2>
+                                 </AnimatePresence>
+                                 <AnimatePresence mode="wait">
+                                     <motion.p
+                                         key={`desc-${activeMaterial}`}
+                                         initial={{ opacity: 0, y: 10 }}
+                                         animate={{ opacity: 1, y: 0 }}
+                                         exit={{ opacity: 0, y: -10 }}
+                                         transition={{ duration: 0.3 }}
+                                         className="text-base sm:text-lg text-white/90 leading-relaxed max-w-xl"
+                                     >
+                                         {activeMaterialData.description}
+                                     </motion.p>
+                                 </AnimatePresence>
+                             </div>
 
                             <AnimatePresence mode="wait">
-                                <motion.div
-                                    key={`card-${activeMaterial}`}
-                                    initial={{ opacity: 0, x: 20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: -20 }}
-                                    transition={{ duration: 0.3 }}
-                                    className="lg:col-span-1 bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 h-fit"
-                                >
-                                    <h3 className="text-sm font-semibold text-white/70 uppercase tracking-wider mb-4">Material Details</h3>
-                                    <p className="text-sm text-white/80 leading-relaxed">
-                                        {activeMaterialData.fullDescription}
-                                    </p>
-                                </motion.div>
-                            </AnimatePresence>
+                                 <motion.div
+                                     key={`card-${activeMaterial}`}
+                                     initial={{ opacity: 0, x: 20 }}
+                                     animate={{ opacity: 1, x: 0 }}
+                                     exit={{ opacity: 0, x: -20 }}
+                                     transition={{ duration: 0.3 }}
+                                     className="bg-white/10 backdrop-blur-md rounded-2xl p-3 border border-white/20 h-fit"
+                                 >
+                                     <h3 className="text-sm font-semibold text-white/70 uppercase tracking-wider mb-4">Material Details</h3>
+                                     <p className="text-sm text-white/80 leading-relaxed">
+                                         {activeMaterialData.fullDescription}
+                                     </p>
+                                 </motion.div>
+                             </AnimatePresence>
                         </div>
                     </Reveal>
                 </div>

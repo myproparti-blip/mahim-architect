@@ -87,7 +87,7 @@ export default function WelcomePage() {
                             </h1>
 
                             <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                                A premier architectural firm delivering innovative design solutions, comprehensive project management, and cutting-edge BIM technology services globally. We transform visions into architectural reality through strategic planning, creative excellence, and unwavering commitment to quality.
+                                We translate ideas into meaningful architectural experiences. Through thoughtful design, precision detailing, and contextual sensitivity, we shape spaces that balance innovation with functionality—transforming concepts into built environments that inspire, endure, and elevate everyday living.
                             </p>
                         </motion.div>
 
@@ -99,7 +99,7 @@ export default function WelcomePage() {
                             className="relative h-96 md:h-[500px] rounded-2xl overflow-hidden shadow-2xl"
                         >
                             <Image
-                                src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&h=600&fit=crop"
+                                src="/images/vison.webp"
                                 alt="Modern Architecture Design"
                                 fill
                                 className="object-cover"
@@ -123,7 +123,7 @@ export default function WelcomePage() {
                     >
                         <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Why Partner With Us</h2>
                         <p className="text-slate-600 text-lg max-w-2xl mx-auto">
-                            Strategic expertise, innovative design, and proven excellence across 250+ projects
+                            Strategic expertise, innovative design, and proven excellence across 500+ projects
                         </p>
                     </motion.div>
 
@@ -247,10 +247,10 @@ export default function WelcomePage() {
 
                     <div className="grid md:grid-cols-4 gap-6">
                         {[
-                            { number: "250+", label: "Projects Completed", desc: "Successful deliveries" },
+                            { number: "500+", label: "Projects Completed", desc: "Successful deliveries" },
                             { number: "15+", label: "Years Experience", desc: "Industry expertise" },
                             { number: "98%", label: "Client Satisfaction", desc: "Happiness rate" },
-                            { number: "50+", label: "Awards Won", desc: "Industry recognition" }
+                            { number: "25+", label: "Awards Won", desc: "Industry recognition" }
                         ].map((stat, index) => (
                             <motion.div
                                 key={index}
@@ -299,7 +299,7 @@ export default function WelcomePage() {
                             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Global Leadership in Architecture</h2>
 
                             <p className="text-slate-700 leading-relaxed text-lg mb-8">
-                                To be a globally recognized leader in architectural innovation, creating timeless spaces that harmonize human needs, environmental responsibility, and economic viability. We envision architecture that transcends aesthetics to become a catalyst for positive change in communities worldwide.
+                               A commitment to shaping world-class environments through strategic thinking, advanced design methodologies, and cultural sensitivity. We deliver transformative architectural solutions that transcend borders, setting new standards in creativity, sustainability, and global impact.
                             </p>
 
                             <div className="space-y-4">
@@ -328,7 +328,7 @@ export default function WelcomePage() {
                             className="relative h-96 md:h-[450px] rounded-2xl overflow-hidden shadow-2xl"
                         >
                             <Image
-                                src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=800&h=600&fit=crop"
+                                src="/images/global2.jpg"
                                 alt="Strategic Vision and Planning"
                                 fill
                                 className="object-cover"
@@ -454,57 +454,150 @@ export default function WelcomePage() {
                 </div>
             </section>
 
-            {/* Process & Methodology Section */}
-            <section className="relative px-4 py-20 md:py-28 bg-gradient-to-b from-white to-slate-50">
-                <div className="max-w-6xl mx-auto">
+            {/* Process & Methodology Section - Architecture Inspired */}
+            <section className="relative px-4 py-20 md:py-32 bg-white overflow-hidden">
+                {/* Blueprint Grid Background */}
+                <div className="absolute inset-0 opacity-3 pointer-events-none">
+                    <div style={{
+                        backgroundImage: "linear-gradient(0deg, transparent 24%, rgba(0,0,0,.05) 25%, rgba(0,0,0,.05) 26%, transparent 27%, transparent 74%, rgba(0,0,0,.05) 75%, rgba(0,0,0,.05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(0,0,0,.05) 25%, rgba(0,0,0,.05) 26%, transparent 27%, transparent 74%, rgba(0,0,0,.05) 75%, rgba(0,0,0,.05) 76%, transparent 77%, transparent)",
+                        backgroundSize: "50px 50px"
+                    }} className="absolute inset-0"></div>
+                </div>
+
+                <div className="max-w-7xl mx-auto relative z-10">
+                    {/* Header */}
                     <motion.div
-                        className="text-center mb-16"
+                        className="text-center mb-20"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Our Proven Process</h2>
-                        <p className="text-slate-600 text-lg max-w-2xl mx-auto">
-                            A systematic approach to turning your vision into exceptional architecture
+                        <h2 className="text-5xl md:text-6xl font-bold text-slate-900 mb-2 tracking-tight">Our Proven Process</h2>
+                        <div className="flex items-center justify-center gap-3 mt-6 mb-4">
+                            <div className="h-px w-12 bg-orange-600"></div>
+                            <p className="text-slate-600 text-sm uppercase tracking-widest font-semibold">ARCHITECTURAL METHODOLOGY</p>
+                            <div className="h-px w-12 bg-orange-600"></div>
+                        </div>
+                        <p className="text-slate-600 text-lg max-w-3xl mx-auto mt-6">
+                            A structured, transparent framework that guides your project from concept to completion with precision and excellence
                         </p>
                     </motion.div>
 
-                    <div className="grid md:grid-cols-5 gap-6 mb-12">
+                    {/* Main Timeline */}
+                    <div className="relative py-12">
+                        {/* Vertical line for mobile, horizontal for desktop */}
+                        <div className="hidden md:block absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent" style={{ top: "60px" }}></div>
+                        <div className="md:hidden absolute left-12 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-slate-300 to-transparent"></div>
+
+                        <div className="grid md:grid-cols-5 gap-8 md:gap-4 auto-rows-fr">
+                             {[
+                                 { num: "01", title: "Discovery & Analysis", desc: "Deep dive into project requirements, site analysis, client vision, and contextual understanding", icon: Target },
+                                 { num: "02", title: "Conceptualization", desc: "Strategic planning, design concepts, spatial planning, and feasibility assessment", icon: Lightbulb },
+                                 { num: "03", title: "Design Development", desc: "Detailed design solutions, technical drawings, material selection, and design refinement", icon: Palette },
+                                 { num: "04", title: "BIM Documentation", desc: "Advanced 3D modeling, construction details, specifications, and technical documentation", icon: Layers },
+                                 { num: "05", title: "Delivery & Support", desc: "Construction support, quality assurance, project oversight, and client handover", icon: CheckCircle }
+                             ].map((step, index) => {
+                                 const Icon = step.icon
+                                 return (
+                                     <motion.div
+                                         key={index}
+                                         initial={{ opacity: 0, y: 20 }}
+                                         whileInView={{ opacity: 1, y: 0 }}
+                                         viewport={{ once: true }}
+                                         transition={{ duration: 0.5, delay: index * 0.1 }}
+                                         className="relative md:pt-0 pt-8 md:pt-0 flex flex-col"
+                                     >
+                                         {/* Connector Node */}
+                                         <motion.div
+                                             className="hidden md:flex absolute left-1/2 -translate-x-1/2 -top-6 w-14 h-14 rounded-full bg-white border-2 border-slate-400 items-center justify-center"
+                                             whileHover={{ scale: 1.15 }}
+                                             transition={{ type: "spring", stiffness: 400 }}
+                                         >
+                                             <span className="text-sm font-bold text-orange-600">{step.num}</span>
+                                         </motion.div>
+
+                                         {/* Mobile node */}
+                                         <motion.div
+                                             className="md:hidden absolute left-0 top-0 w-24 h-10 rounded-r-full bg-orange-600 flex items-center justify-start pl-8"
+                                             whileHover={{ scale: 1.05 }}
+                                         >
+                                             <span className="text-white font-bold text-sm">{step.num}</span>
+                                         </motion.div>
+
+                                         {/* Card */}
+                                         <motion.div
+                                             whileHover={{ borderColor: "rgb(234, 88, 12)" }}
+                                             transition={{ duration: 0.3 }}
+                                             className="md:pt-8 md:mt-0 mt-0 flex-1 flex flex-col"
+                                         >
+                                             <div className="bg-white border-2 border-slate-300 rounded-lg p-7 hover:shadow-lg transition-shadow duration-300 hover:border-orange-500 group flex flex-col h-full">
+                                                 {/* Step Icon */}
+                                                 <motion.div
+                                                     className="mb-5 inline-flex"
+                                                     whileHover={{ scale: 1.1 }}
+                                                 >
+                                                     <div className="p-3 bg-orange-100 rounded-lg">
+                                                         <Icon className="w-6 h-6 text-orange-600" />
+                                                     </div>
+                                                 </motion.div>
+
+                                                 {/* Title */}
+                                                 <h3 className="text-lg font-bold text-slate-900 mb-3 leading-tight">
+                                                     {step.title}
+                                                 </h3>
+
+                                                 {/* Description */}
+                                                 <p className="text-slate-600 text-sm leading-relaxed mb-4 flex-1">
+                                                     {step.desc}
+                                                 </p>
+
+                                                 {/* Divider */}
+                                                 <div className="border-t border-slate-200 pt-4 mt-auto">
+                                                     <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">PHASE {step.num}</p>
+                                                 </div>
+                                             </div>
+                                         </motion.div>
+                                     </motion.div>
+                                 )
+                             })}
+                        </div>
+                    </div>
+
+                    {/* Key Metrics */}
+                    <motion.div
+                        className="mt-20 grid md:grid-cols-3 gap-8 pt-16 border-t-2 border-slate-200"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.5 }}
+                    >
                         {[
-                            { num: "01", title: "Discovery", desc: "Understanding your vision, goals, and requirements", icon: Target },
-                            { num: "02", title: "Strategy", desc: "Developing comprehensive project strategy", icon: Lightbulb },
-                            { num: "03", title: "Design", desc: "Creating innovative design solutions", icon: Palette },
-                            { num: "04", title: "Documentation", desc: "Detailed BIM modeling and documentation", icon: Layers },
-                            { num: "05", title: "Delivery", desc: "Seamless project execution and support", icon: CheckCircle }
-                        ].map((step, index) => {
-                            const Icon = step.icon
+                            { label: "TIMELINE", value: "8-16 Weeks", icon: Award, detail: "Depends on project scope" },
+                            { label: "DELIVERABLES", value: "25+ Documents", icon: Layers, detail: "Complete design documentation" },
+                            { label: "SUPPORT", value: "End-to-End", icon: Shield, detail: "From concept to construction" }
+                        ].map((metric, idx) => {
+                            const Icon = metric.icon
                             return (
                                 <motion.div
-                                    key={index}
-                                    initial={{ opacity: 0, y: 20 }}
+                                    key={idx}
+                                    initial={{ opacity: 0, y: 10 }}
                                     whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                                    className="relative"
+                                    transition={{ delay: 0.5 + idx * 0.1 }}
+                                    className="flex gap-4 items-start"
                                 >
-                                    {index < 4 && (
-                                        <div className="hidden md:block absolute top-12 left-[60%] right-0 h-0.5 bg-gradient-to-r from-orange-300 to-transparent"></div>
-                                    )}
-                                    <Card className="relative p-6 rounded-2xl bg-white border border-slate-200 hover:border-orange-400 hover:shadow-lg transition-all duration-300 h-full flex flex-col group">
-                                        <div className="flex items-start justify-between mb-4">
-                                            <span className="text-3xl font-bold text-orange-600 group-hover:text-orange-700">{step.num}</span>
-                                            <div className="p-2 rounded-lg bg-orange-100 group-hover:bg-orange-200 transition-colors">
-                                                <Icon className="w-5 h-5 text-orange-600" />
-                                            </div>
-                                        </div>
-                                        <h3 className="text-lg font-bold text-slate-900 mb-2">{step.title}</h3>
-                                        <p className="text-slate-600 text-sm flex-1">{step.desc}</p>
-                                    </Card>
+                                    <div className="p-3 bg-slate-100 rounded-lg flex-shrink-0 border border-slate-300">
+                                        <Icon className="w-6 h-6 text-slate-700" />
+                                    </div>
+                                    <div>
+                                        <p className="text-xs text-slate-500 uppercase tracking-widest font-semibold mb-1">{metric.label}</p>
+                                        <p className="text-2xl font-bold text-slate-900">{metric.value}</p>
+                                        <p className="text-xs text-slate-600 mt-1">{metric.detail}</p>
+                                    </div>
                                 </motion.div>
                             )
                         })}
-                    </div>
+                    </motion.div>
                 </div>
             </section>
            

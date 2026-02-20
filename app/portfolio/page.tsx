@@ -821,15 +821,13 @@ export default function PortfolioPage() {
         {/* Header Section */}
         <div className="mb-20">
           <div className="space-y-4 mb-10">
-            <div className="inline-block">
-              <span className="text-xs font-bold uppercase tracking-widest text-gray-600 bg-gray-100 px-4 py-2 rounded-full">Our Work</span>
-            </div>
+           
             <h1 className="text-7xl sm:text-8xl font-bold text-gray-900 tracking-tighter leading-tight">
-              Architectural <br /> Excellence
+              Architectural     Excellence
             </h1>
             <div className="w-32 h-1.5 bg-gradient-to-r from-black via-gray-800 to-transparent mt-6"></div>
           </div>
-          <p className="text-lg text-gray-600 max-w-3xl leading-relaxed">
+          <p className="text-lg text-gray-600 max-w-4xl leading-relaxed">
             Award-winning design and architecture across residential, commercial, and institutional spaces. Each project represents our commitment to innovation, sustainability, and timeless elegance.
           </p>
         </div>

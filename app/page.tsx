@@ -1,9 +1,9 @@
 "use client"
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
-import { FeaturedProducts } from "@/components/featured-products"
 import { CollectionStrip } from "@/components/collection-strip"
 import { MaterialsSection } from "@/components/materials-section"
+import { EthosSection } from "@/components/ethos-section"
 import { NewsletterSection } from "@/components/newsletter-section"
 import { Footer } from "@/components/footer"
 
@@ -12,9 +12,9 @@ export default function HomePage() {
     <main className="min-h-screen bg-white">
       <Header />
       <HeroSection />
-      <FeaturedProducts />
       <CollectionStrip />
       <MaterialsSection />
+      <EthosSection />
       <NewsletterSection />
       <Footer />
     </main>
