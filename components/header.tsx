@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
@@ -13,6 +13,7 @@ export function Header() {
     const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false)
     const [connectDropdownOpen, setConnectDropdownOpen] = useState(false)
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const connectDropdownRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         const handleScroll = () => {
@@ -22,6 +23,20 @@ export function Header() {
         window.addEventListener("scroll", handleScroll)
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
+
+    // Handle click outside connect dropdown
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (connectDropdownRef.current && !connectDropdownRef.current.contains(event.target as Node)) {
+                setConnectDropdownOpen(false)
+            }
+        }
+
+        if (connectDropdownOpen) {
+            document.addEventListener("mousedown", handleClickOutside)
+            return () => document.removeEventListener("mousedown", handleClickOutside)
+        }
+    }, [connectDropdownOpen])
 
     const navItems = [
         { label: "VIRTUAL TOUR", href: "/virtual-tour", icon: Zap },
@@ -186,7 +201,7 @@ export function Header() {
                 </nav>
 
                 {/* Right: Connect with Us Button */}
-                <div className="relative hidden sm:flex">
+                <div ref={connectDropdownRef} className="relative hidden sm:flex">
                     <motion.button
                         onClick={() => setConnectDropdownOpen(!connectDropdownOpen)}
                         className="px-4 py-2 rounded-full border border-amber-500/60 text-amber-400 text-sm font-semibold hover:bg-amber-500/15 transition-all duration-300 relative group flex items-center gap-2"

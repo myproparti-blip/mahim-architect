@@ -39,8 +39,8 @@ const tourProjects = [
     id: "3",
     title: "PLESENT INTERIOR WORK ",
     category: "Modern",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
-    panoramaImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&h=600&fit=crop",
+    image: "/images/Virtual Tour/BEDROOM3.jpg",
+    panoramaImage: "/images/Virtual Tour/BEDROOM3.jpg",
     badge: "Featured" as const,
     images360: [
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
@@ -49,7 +49,7 @@ const tourProjects = [
     floorSections: [
       {
         title: "Interior Design",
-        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
+        image: "/images/Virtual Tour/BEDROOM3.jpg",
       },
      
     ],
@@ -123,7 +123,7 @@ const tourProjects = [
       id: "6",
       title: "MODERN INTERIOR - THE CANDLEWOOD ",
       category: "Modern",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
+      image: "/images/Virtual Tour/kitchen room.jpg",
       panoramaImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&h=600&fit=crop",
       badge: "Featured" as const,
       images360: [
@@ -133,23 +133,23 @@ const tourProjects = [
       floorSections: [
         {
           title: "Bedroom Interior",
-          image: "/images/Virtual Tour/PARFUL-GF-FF.jpg",
+          image: "/images/Virtual Tour/kitchen room.jpg"
         },
         {
           title: "Bedroom-2 Interior",
-          image: "/images/Virtual Tour/PARFUL-GF-FF.jpg",
+          image: "/images/Virtual Tour/bedroom2.jpg",
         },
         {
           title: "Bedroom-3 Interior",
-          image: "/images/Virtual Tour/PARFUL-GF-FF.jpg",
+          image: "/images/Virtual Tour/bedroom3.jpg",
         },
         {
           title: "Living Sitting",
-          image: "/images/Virtual Tour/PARFUL-GF-FF.jpg",
+          image:"/images/Virtual Tour/kitchen.jpg",
         },
         {
           title: "Kitchen Dining",
-          image: "/images/Virtual Tour/PARFUL-GF-FF.jpg",
+          image: "/images/Virtual Tour/thumbnail-2.jpg",
         },
       ],
       
@@ -179,7 +179,7 @@ const tourProjects = [
       },
       {
         title: "Bedroom One",
-        image: "/images/Virtual Tour/thumbnail-3.jpg",
+        image: "/images/Virtual Tour/cb-1.jpg",
       },
       {
         title: "Kitchen Interior",
@@ -245,7 +245,7 @@ const tourProjects = [
     id: "10",
     title: "TOP LUXURIOUS PENT HOUSE ",
     category: "Luxury",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
+    image: "/images/Virtual Tour/vbliving.jpg",
     panoramaImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&h=600&fit=crop",
     badge: "Featured" as const,
     images360: [
@@ -255,7 +255,7 @@ const tourProjects = [
     floorSections: [
       {
         title: "Modern Bedroom Interior",
-        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
+        image:  "/images/Virtual Tour/jivrajbhai.jpg",
       },
       {
         title: "Luxurious Bedroom Interior",
@@ -263,7 +263,7 @@ const tourProjects = [
       },
       {
         title: "Modern Kitchen Dining Design",
-        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
+        image: "/images/Virtual Tour/bhaveshliving.jpg",
       },
       {
         title: "Living Room",
