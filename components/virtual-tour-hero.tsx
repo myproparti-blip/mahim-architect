@@ -19,7 +19,7 @@ export function VirtualTourHero() {
         </div>
         <div className="flex-1 relative overflow-hidden">
           <Image
-            src="https://images.unsplash.com/photo-1600566753086-00f18a0cc482?w=800&h=600&fit=crop"
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop"
             alt="Panoramic view 2"
             fill
             className="object-cover"
