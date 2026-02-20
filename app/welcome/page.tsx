@@ -328,7 +328,7 @@ export default function WelcomePage() {
                             className="relative h-96 md:h-[450px] rounded-2xl overflow-hidden shadow-2xl"
                         >
                             <Image
-                                src="/images/Virtual Tour/global2.jpg"
+                                src="/images/virtual-tour/global2.jpg"
                                 alt="Strategic Vision and Planning"
                                 fill
                                 className="object-cover"
