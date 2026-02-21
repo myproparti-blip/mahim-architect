@@ -21,7 +21,7 @@ interface Property {
 const DEMO_PROPERTIES: Property[] = [
   {
     id: 1,
-    name: "Surat Diamond Bourse",
+    name: "SBC Panel Interior",
     category: "Commercial, High rise commercial",
     location: "SURAT, GUJARAT",
     surfaceArea: "",
@@ -31,7 +31,7 @@ const DEMO_PROPERTIES: Property[] = [
       "/images/portfolio/property-1-3.jpg",
       "/images/portfolio/property-1-4.jpg",
     ],
-    description: "Surat Diamond Bourse Office Interior Design As a leading role of Best Interior Designer, we design Diamond Office in Surat Diamond Bourse (SDB) the largest office building in this world located at Surat, Gujarat, India. With our knowledge and expertise team at Mahim Architect, we create a unique Diamond office interior design that is reflect every aspect of diamond business.",
+    description: "We proudly completed interior work at Surat Diamond Bourse (SDB), the world’s largest office building located in Surat, Gujarat.Our firm, Mahim Architect, was selected as one of only 15 approved architects permitted to execute interior projects inside this prestigious diamond trading hub. Being among the selected architects for such a landmark project reflects our expertise, trust, and design excellence.",
   },
   {
     id: 2,

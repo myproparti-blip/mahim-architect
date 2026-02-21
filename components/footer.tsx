@@ -1,11 +1,12 @@
 "use client"
 import { motion } from "framer-motion"
 import { Instagram, Mail, MessageCircle, ArrowUpRight, MapPin, Phone } from "lucide-react"
+import { memo, useMemo } from "react"
 
-export function Footer() {
-    const currentYear = new Date().getFullYear()
+const Footer = memo(function Footer() {
+    const currentYear = useMemo(() => new Date().getFullYear(), [])
 
-    const footerLinks = {
+    const footerLinks = useMemo(() => ({
       Company: [
         { name: "About Us", href: "/welcome" },
         { name: "Design Strategy", href: "/design-strategy" },
@@ -19,18 +20,18 @@ export function Footer() {
         { name: "FAQs", href: "/faqs" },
         { name: "Contact", href: "/support" },
       ],
-    }
+    }), [])
 
-    const socialLinks = [
+    const socialLinks = useMemo(() => [
         { name: "WhatsApp", icon: MessageCircle, href: "https://wa.me/917046127242", target: "_blank" },
         { name: "Email", icon: Mail, href: "mailto:mahimhr01@gmail.com" },
-        { name: "Instagram", icon: Instagram, href: "https://instagram.com/", target: "_blank" },
-    ]
+        { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/mahim99arch?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==", target: "_blank" },
+    ], [])
 
-    const contactInfo = [
+    const contactInfo = useMemo(() => [
         { icon: Phone, text: "+91 82383 77000", href: "tel:+918238377000" },
         { icon: Mail, text: "mahimhr01@gmail.com", href: "mailto:mahimhr01@gmail.com" },
-    ]
+    ], [])
 
     return (
         <footer className="bg-gradient-to-b from-neutral-950 to-black border-t border-amber-500/20 text-white">
@@ -162,4 +163,8 @@ export function Footer() {
             </div>
         </footer>
     )
-}
+})
+
+Footer.displayName = "Footer"
+
+export { Footer }

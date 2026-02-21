@@ -1,30 +1,36 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useMemo, useCallback, memo } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { ChevronDown, BookOpen, Users, Handshake, Award, Briefcase, PenTool, Zap, Home, Mail, MessageCircle, Instagram } from "lucide-react"
+import { ChevronDown, BookOpen, Users, Handshake, Award, Briefcase, PenTool, Zap, Home, Mail, MessageCircle, Instagram, UserPlus } from "lucide-react"
 
-export function Header() {
-    const pathname = usePathname()
-    const [isScrolled, setIsScrolled] = useState(false)
-    const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false)
-    const [connectDropdownOpen, setConnectDropdownOpen] = useState(false)
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-    const connectDropdownRef = useRef<HTMLDivElement>(null)
+const Header = memo(function Header() {
+     const pathname = usePathname()
+     const [isScrolled, setIsScrolled] = useState(false)
+     const [connectDropdownOpen, setConnectDropdownOpen] = useState(false)
+     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+     const connectDropdownRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
+        let ticking = false
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20)
+            if (!ticking) {
+                ticking = true
+                requestAnimationFrame(() => {
+                    setIsScrolled(window.scrollY > 20)
+                    ticking = false
+                })
+            }
         }
 
-        window.addEventListener("scroll", handleScroll)
+        window.addEventListener("scroll", handleScroll, { passive: true })
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
 
-    // Handle click outside connect dropdown
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (connectDropdownRef.current && !connectDropdownRef.current.contains(event.target as Node)) {
@@ -38,48 +44,18 @@ export function Header() {
         }
     }, [connectDropdownOpen])
 
-    const navItems = [
+    const navItems = useMemo(() => [
         { label: "VIRTUAL TOUR", href: "/virtual-tour", icon: Zap },
         { label: "PORTFOLIO", href: "/portfolio", icon: Briefcase },
-        { label: "KEY PERSON", href: "/key-person", icon: Users },
-    ]
+        { label: "VALUATION SERVICES", href: "/valuation-services", icon: Briefcase },
+        { label: "JOIN US", href: "/join-us", icon: UserPlus },
+    ], [])
 
-    const servicesMenuItems = [
-        { label: "Architecture", href: "#architecture", icon: Home },
-        { label: "Revit BIM Service", href: "#revit-bim", icon: Zap },
-        { label: "Outsourcing", href: "#outsourcing", icon: Briefcase },
-        { label: "Furniture", href: "#furniture", icon: Briefcase },
-        { label: "Engineering", href: "#engineering", icon: PenTool },
-        { label: "BIM Drafting", href: "#bim-drafting", icon: PenTool },
-        { label: "PMC", href: "#pmc", icon: Briefcase },
-        { label: "Lighting", href: "#lighting", icon: Zap },
-        { label: "Construction", href: "#construction", icon: Home },
-        { label: "BIM Modelling", href: "#bim-modelling", icon: PenTool },
-        { label: "Valuation", href: "#valuation", icon: Briefcase },
-        { label: "Graphics", href: "#graphics", icon: PenTool },
-        { label: "Structure Design", href: "#structure-design", icon: Home },
-        { label: "Architectural BIM", href: "#arch-bim", icon: PenTool },
-        { label: "Consultancy", href: "#consultancy", icon: Briefcase },
-        { label: "Product Design", href: "#product", icon: Briefcase },
-        { label: "Master Planning", href: "#master-planning", icon: Home },
-        { label: "Structural BIM", href: "#structural-bim", icon: PenTool },
-        { label: "Virtual Tour", href: "#virtual-tour", icon: Zap },
-        { label: "Packaging", href: "#packaging", icon: Briefcase },
-        { label: "Urban Design", href: "#urban-design", icon: Home },
-        { label: "Revit Family Creation", href: "#revit-family", icon: PenTool },
-        { label: "3D Visualization", href: "#3d-viz", icon: Zap },
-        { label: "Fashion Design", href: "#fashion", icon: Briefcase },
-        { label: "Landscape Design", href: "#landscape", icon: Home },
-        { label: "MEP Services", href: "#mep", icon: Zap },
-        { label: "Interior Design", href: "#interior", icon: Home },
-        { label: "Exhibition Design", href: "#exhibition", icon: Briefcase },
-    ]
-
-    const connectMenuItems = [
+    const connectMenuItems = useMemo(() => [
         { label: "WhatsApp", href: "https://wa.me/917046127242", description: "Chat with us on WhatsApp", icon: MessageCircle },
         { label: "Email", href: "mailto:mahimhr01@gmail.com", description: "Send us an email", icon: Mail },
-        { label: "Instagram", href: "https://instagram.com/", description: "Follow us on Instagram", icon: Instagram },
-    ]
+        { label: "Instagram", href: "https://www.instagram.com/mahim99arch?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==", description: "Follow us on Instagram", icon: Instagram },
+    ], [])
 
     return (
         <motion.header
@@ -94,32 +70,27 @@ export function Header() {
             animate={{ y: 0 }}
             transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
         >
-            <div className="flex items-center justify-between px-6 lg:px-8 py-4 gap-6">
+            <div className="flex items-center justify-between px-6 lg:px-8 py-0 gap-3">
                 {/* Left: Logo - Compact */}
-                <Link href="/" className="flex-shrink-0 hidden sm:flex items-center gap-1">
+                <Link href="/" className="flex-shrink-0 hidden sm:flex items-center">
                     <motion.div
-                        className="flex items-center gap-1"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.6 }}
                     >
-                        {/* Two vertical bars */}
-                        <div className="flex gap-0.5">
-                            <div className="w-1 h-3 bg-amber-400 rounded-sm" />
-                            <div className="w-1 h-4 bg-amber-400 rounded-sm" />
-                        </div>
-
-                        {/* Text */}
-                        <div className="flex flex-col leading-none">
-                            <div className="font-serif font-bold text-amber-400 text-xs leading-tight">MAHIM</div>
-                            <div className="h-0.5 bg-amber-400 w-full" />
-                            <div className="font-serif text-amber-400 text-xs leading-tight">Architect</div>
-                        </div>
+                        <Image
+                            src="/images/comp logo/logoo.png"
+                            alt="MAHIM Architect"
+                            width={80}
+                            height={32}
+                            className="h-auto"
+                            style={{ backgroundColor: "transparent" }}
+                        />
                     </motion.div>
                 </Link>
 
                 {/* Center: Navigation - expanded to fill space */}
-                <nav className="hidden md:flex items-center gap-6 lg:gap-8 flex-1 justify-center">
+                <nav className="hidden md:flex items-center gap-4 lg:gap-6 flex-1 justify-center">
                     {/* Home Link */}
                     <Link href="/">
                         <motion.div
@@ -154,7 +125,7 @@ export function Header() {
                             )}
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0, duration: 0.4 }}
+                            transition={{ delay: 0.06, duration: 0.4 }}
                             whileHover={{ y: -1 }}
                         >
                             ABOUT US
@@ -182,7 +153,7 @@ export function Header() {
                                 )}
                                 initial={{ opacity: 0, y: -10 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: (index + 2) * 0.06, duration: 0.4 }}
+                                transition={{ delay: (index + 3) * 0.06, duration: 0.4 }}
                                 whileHover={{ y: -1 }}
                             >
                                 {item.label}
@@ -263,23 +234,20 @@ export function Header() {
                     </AnimatePresence>
                 </div>
 
-                {/* Mobile Branding Text */}
-                <div className="md:hidden flex items-center gap-2">
+                {/* Mobile Branding Image */}
+                <div className="md:hidden flex items-center">
                     <motion.div
-                        className="flex items-center gap-2"
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        {/* Two vertical bars */}
-                        <div className="flex gap-0.5">
-                            <div className="w-0.5 h-2 bg-amber-500 rounded-sm" />
-                            <div className="w-0.5 h-3 bg-amber-500 rounded-sm" />
-                        </div>
-                        {/* Text */}
-                        <span className="text-amber-500 font-serif font-bold text-xs">
-                            Mahim Architect
-                        </span>
+                        <Image
+                            src="/mahim-logo.png"
+                            alt="MAHIM Architect"
+                            width={60}
+                            height={24}
+                            className="h-auto"
+                        />
                     </motion.div>
                 </div>
 
@@ -369,4 +337,8 @@ export function Header() {
             </div>
         </motion.header>
     )
-}
+})
+
+Header.displayName = "Header"
+
+export { Header }

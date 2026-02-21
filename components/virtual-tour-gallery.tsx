@@ -27,10 +27,12 @@ const tourProjects = [
       {
         title: "GROUND-FIRST FLOOR",
         image: "/images/Virtual Tour/PARFUL-GF-FF.jpg",
+        contentUrl: "/images/3d/bedroom1.swf",
       },
       {
         title: "SECOND-THIRD FLOOR",
-        image: "/images/Virtual Tour/Screenshot_7.jpg",
+        image: "/images/3d/bedroom2.swf",
+        contentUrl: "/images/3d/bedroom2.swf",
       },
     ],
    

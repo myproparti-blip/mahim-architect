@@ -8,6 +8,7 @@ import { PanoramaViewer } from "./panorama-viewer"
 interface FloorSection {
   title: string
   image: string
+  contentUrl?: string
 }
 
 interface FloorSectionModalProps {
@@ -39,7 +40,7 @@ export function FloorSectionModal({ isOpen, onClose, project }: FloorSectionModa
 
       {selectedSection ? (
         // Panorama View
-        <div className="w-full h-full overflow-y-auto flex items-start justify-center pt-20 pb-8">
+        <div className="w-full h-full flex items-start justify-center pt-20 pb-8" style={{ overflowY: "auto", overflowX: "hidden" }}>
           <div className="w-full max-w-6xl px-8">
             <button
               onClick={() => setSelectedSection(null)}
@@ -49,7 +50,7 @@ export function FloorSectionModal({ isOpen, onClose, project }: FloorSectionModa
               Back
             </button>
             <h2 className="text-3xl font-bold text-neutral-900 mb-6 text-center">{selectedSection.title}</h2>
-            <PanoramaViewer imageUrl={selectedSection.image} title={selectedSection.title} />
+            <PanoramaViewer imageUrl={selectedSection.contentUrl || selectedSection.image} title={selectedSection.title} />
           </div>
         </div>
       ) : (

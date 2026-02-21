@@ -1,20 +1,29 @@
 "use client"
+
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ClientLogos } from "@/components/client-logos"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Target, Lightbulb, Award, Shield, Zap, Building2, Home, BarChart3, Leaf, Users, Heart, Sparkles, ArrowRight, Briefcase, CheckCircle, Globe, Layers, Palette } from "lucide-react"
-import { motion } from "framer-motion"
-import { useState } from "react"
+import { Target, Lightbulb, Award, Shield, Zap, Building2, Home, BarChart3, Leaf, Users, Heart, Sparkles, ArrowRight, Briefcase, CheckCircle, Globe, Layers, Palette, Linkedin, Mail, Phone } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { useState, useMemo, useCallback } from "react"
 import Image from "next/image"
+import { X } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import { KeyPersonCTA } from "@/components/key-person-cta"
+import { TeamMemberCard } from "@/components/team-member-card"
 
 export default function WelcomePage() {
-    const [hoveredCard, setHoveredCard] = useState<number | null>(null)
+     const [hoveredCard, setHoveredCard] = useState<number | null>(null)
+     const [showFounderProfile, setShowFounderProfile] = useState(false)
+     
+     const setHoveredCardCallback = useCallback((value: number | null) => {
+          setHoveredCard(value)
+     }, [])
 
-    const features = [
+    const features = useMemo(() => [
         {
             icon: Target,
             title: "Strategic Excellence",
@@ -35,9 +44,9 @@ export default function WelcomePage() {
             title: "Quality Assurance",
             description: "Every project meets rigorous standards of craftsmanship, precision, and attention to detail from concept through completion"
         }
-    ]
+    ], [])
 
-    const containerVariants = {
+    const containerVariants = useMemo(() => ({
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -46,16 +55,16 @@ export default function WelcomePage() {
                 delayChildren: 0.2
             }
         }
-    }
+    }), [])
 
-    const itemVariants = {
+    const itemVariants = useMemo(() => ({
         hidden: { opacity: 0, y: 20 },
         visible: {
             opacity: 1,
             y: 0,
             transition: { duration: 0.6 }
         }
-    }
+    }), [])
 
     return (
         <main className="min-h-screen bg-white">
@@ -677,8 +686,183 @@ export default function WelcomePage() {
                 </div>
             </section>
 
+           {/* Founder Section */}
+            <section className="py-24 lg:py-28 bg-gradient-to-b from-white to-neutral-50 w-full overflow-x-hidden">
+                <div className="max-w-5xl mx-auto px-6 lg:px-12 w-full">
+                    {/* Section Header */}
+                    <motion.div
+                        className="text-center mb-16"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                        viewport={{ once: true }}
+                    >
+                        <p className="text-amber-600 font-semibold tracking-widest text-sm mb-4 uppercase">Leadership</p>
+                        <h2 className="text-4xl lg:text-5xl font-bold text-neutral-900 mb-6">
+                            Meet Our <span className="italic font-light text-neutral-600">Founder</span>
+                        </h2>
+                    </motion.div>
+
+                    {/* Founder Card Box */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                        viewport={{ once: true }}
+                    >
+                        {/* Main Layout */}
+                        <div className="flex flex-col md:flex-row gap-6 md:gap-8 lg:gap-12 items-start md:items-center mb-6">
+                           {/* Image Section */}
+                        <div className="relative w-full md:w-[420px] lg:w-[500px] h-80 sm:h-96 md:h-[420px] lg:h-[500px] flex-shrink-0 rounded-xl overflow-hidden bg-neutral-100 shadow-xl">
+                        <Image
+                        src="/images/admin/01-HIGH-RESOLUTION-PHOTO-ASHISH-PATEL.jpg"
+                        alt="Ashish Patel"
+                        fill
+                        className="object-cover"
+                        />
+                        <Badge className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-amber-600 text-white font-semibold px-3 sm:px-4 py-1 text-xs sm:text-sm">
+                        Founder
+                        </Badge>
+                        </div>
+
+                            {/* Content Section */}
+                            <div className="flex-1 w-full">
+                                {/* Name & Title */}
+                                <div className="mb-4 sm:mb-6">
+                                    <h3 className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-bold text-neutral-900 mb-2">Ashish Patel</h3>
+                                    <p className="text-amber-600 font-bold text-xs sm:text-sm uppercase tracking-widest">Founder & Principal Architect</p>
+                                </div>
+
+                                {/* Experience */}
+                                <div className="mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-neutral-200">
+                                    <p className="text-xs text-neutral-600 font-bold uppercase tracking-widest mb-2">Experience</p>
+                                    <p className="text-base sm:text-lg text-neutral-800 font-semibold">15+ Years in Architecture & Design</p>
+                                </div>
+
+                                {/* Bio */}
+                                <p className="text-neutral-600 text-sm sm:text-base leading-relaxed mb-4 sm:mb-6 font-medium">
+Since 2009, he has been managing and guiding architectural projects from concept development to execution, ensuring quality, creativity, and client satisfaction at every stage. His leadership has shaped the firm’s strong foundation in design excellence and project management.                                </p>
+
+                                {/* Social Links */}
+                                <div className="flex gap-3 sm:gap-4 mb-4 sm:mb-6">
+                                    <a href="https://in.linkedin.com/company/mahim-architects" target="_blank" rel="noopener noreferrer" className="p-2.5 sm:p-3 rounded-full bg-neutral-100 text-neutral-700 hover:bg-amber-100 hover:text-amber-600 transition-colors border border-neutral-200 hover:border-amber-300">
+                                        <Linkedin className="w-4 sm:w-5 h-4 sm:h-5" />
+                                    </a>
+                                    <a href="mailto:mahimhr01@gmail.com" className="p-2.5 sm:p-3 rounded-full bg-neutral-100 text-neutral-700 hover:bg-amber-100 hover:text-amber-600 transition-colors border border-neutral-200 hover:border-amber-300">
+                                        <Mail className="w-4 sm:w-5 h-4 sm:h-5" />
+                                    </a>
+                                    <a href="tel:+918238377000" className="p-2.5 sm:p-3 rounded-full bg-neutral-100 text-neutral-700 hover:bg-amber-100 hover:text-amber-600 transition-colors border border-neutral-200 hover:border-amber-300">
+                                        <Phone className="w-4 sm:w-5 h-4 sm:h-5" />
+                                    </a>
+                                </div>
+                                
+                                {/* View Profile Button */}
+                                <Button
+                                    size="lg"
+                                    onClick={() => setShowFounderProfile(true)}
+                                    className="w-full sm:w-auto bg-amber-600 hover:bg-amber-700 text-white font-semibold px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg transition-colors text-base sm:text-lg"
+                                >
+                                    View Profile
+                                </Button>
+                                </div>
+                                </div>
+
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Founder Profile Modal */}
+            <AnimatePresence>
+                {showFounderProfile && (
+                    <motion.div
+                        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setShowFounderProfile(false)}
+                    >
+                        <motion.div
+                            className="bg-white rounded-3xl w-full max-w-4xl shadow-2xl max-h-[90vh] overflow-y-auto"
+                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                            transition={{ duration: 0.3 }}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {/* Header with Close Button */}
+                            <div className="sticky top-0 bg-white border-b border-neutral-200 p-6 flex justify-between items-center rounded-t-3xl">
+                                <h2 className="text-3xl font-bold text-neutral-900">Ashish Patel</h2>
+                                <button
+                                    onClick={() => setShowFounderProfile(false)}
+                                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                                >
+                                    <X size={28} />
+                                </button>
+                            </div>
+
+                            {/* Content */}
+                            <div className="p-8 lg:grid lg:grid-cols-2 gap-8">
+                                {/* Image */}
+                                <div className="relative h-96 rounded-2xl overflow-hidden bg-neutral-100 mb-8 lg:mb-0 shadow-lg">
+                                    <Image
+                                        src="/images/admin/01-HIGH-RESOLUTION-PHOTO-ASHISH-PATEL.jpg"
+                                        alt="Ashish Patel"
+                                        fill
+                                        className="object-cover"
+                                    />
+                                    <Badge className="absolute top-4 left-4 bg-amber-600 text-white">Founder</Badge>
+                                </div>
+
+                                {/* Details */}
+                                <div className="flex flex-col">
+                                    {/* Title */}
+                                    <p className="text-amber-600 font-bold text-lg uppercase tracking-widest mb-6">Founder & Principal Architect</p>
+
+                                    {/* Experience */}
+                                    <div className="mb-8">
+                                        <h3 className="text-sm font-bold text-neutral-700 uppercase tracking-widest mb-3">Experience</h3>
+                                        <p className="text-lg font-semibold text-neutral-900">15+ Years in Architecture & Design</p>
+                                    </div>
+
+                                    {/* Bio */}
+                                    <div className="mb-8">
+                                        <h3 className="text-sm font-bold text-neutral-700 uppercase tracking-widest mb-3">About</h3>
+                                        <p className="text-neutral-600 leading-relaxed text-base">
+Since 2009, he has been managing and guiding architectural projects from concept development to execution, ensuring quality, creativity, and client satisfaction at every stage. His leadership has shaped the firm’s strong foundation in design excellence and project management.                                        </p>
+                                    </div>
+
+                                    {/* Social Links */}
+                                    <div className="flex gap-4 pt-6 border-t border-neutral-200">
+                                        <a
+                                            href="https://in.linkedin.com/company/mahim-architects"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="p-3 rounded-full bg-neutral-100 text-neutral-700 hover:bg-amber-100 hover:text-amber-600 transition-colors"
+                                        >
+                                            <Linkedin className="w-5 h-5" />
+                                        </a>
+                                        <a
+                                            href="mailto:mahimhr01@gmail.com"
+                                            className="p-3 rounded-full bg-neutral-100 text-neutral-700 hover:bg-amber-100 hover:text-amber-600 transition-colors"
+                                        >
+                                            <Mail className="w-5 h-5" />
+                                        </a>
+                                        <a
+                                            href="tel:+918238377000"
+                                            className="p-3 rounded-full bg-neutral-100 text-neutral-700 hover:bg-amber-100 hover:text-amber-600 transition-colors"
+                                        >
+                                            <Phone className="w-5 h-5" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
            <KeyPersonCTA/>
             <Footer />
-        </main>
-    )
-}
+           </main>
+           )
+           }

@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import { SWFPlayer } from "./swf-player"
 
 declare global {
   interface Window {
@@ -15,11 +16,20 @@ interface PanoramaViewerProps {
 
 export function PanoramaViewer({ imageUrl, title }: PanoramaViewerProps) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const isSWF = imageUrl.toLowerCase().endsWith(".swf")
+  const isVideo = /\.(mp4|webm|mov|avi)$/i.test(imageUrl)
+
+  
+
+  // Return SWF player for SWF files
+  if (isSWF) {
+    return <SWFPlayer src={imageUrl} title={title} />
+  }
 
   useEffect(() => {
     if (!containerRef.current) return
 
-    // Load pannellum script
+    // Load pannellum script for image files
     if (!window.pannellum) {
       const script = document.createElement("script")
       script.src = "https://cdn.pannellum.org/2.5/pannellum.js"
@@ -61,6 +71,12 @@ export function PanoramaViewer({ imageUrl, title }: PanoramaViewerProps) {
       style={{
         width: "100%",
         height: "500px",
+        backgroundColor: "#f3f4f6",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "hidden",
+        position: "relative",
       }}
     />
   )
