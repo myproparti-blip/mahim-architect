@@ -12,3 +12,5 @@ export const metadata: Metadata = genMetadata({
 export default function ArchitectInSuratLayout({ children }: { children: React.ReactNode }) {
   return children
 }
+
+

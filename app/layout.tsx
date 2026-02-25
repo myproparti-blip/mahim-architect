@@ -88,6 +88,9 @@ export default function RootLayout({
         {/* JSON-LD Organization Schema */}
         <JsonLd data={getOrganizationSchema()} />
 
+        {/* Google Search Console Verification */}
+        <meta name="google-site-verification" content="REPLACE_WITH_YOUR_GOOGLE_VERIFICATION_CODE" />
+
         {/* Additional Meta Tags */}
         <meta name="application-name" content="Mahim Architects" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
