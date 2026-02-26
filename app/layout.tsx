@@ -13,6 +13,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://mahimarchitect.com"),
   title: {
     template: "%s | Mahim Architects by Ashish Patel - Architecture in Surat, Gujarat",
     default: "Mahim Architects by Ashish Patel - Residential & Commercial Architecture in Surat, Gujarat",
@@ -30,6 +31,9 @@ export const metadata: Metadata = {
     "interior architect Surat",
   ],
   generator: "Next.js",
+  verification: {
+    google: "NdpqGNyZe2LJXw5qeWCc5unMjsGWS9zrIeRQl0T_UDY",
+  },
   alternates: {
     canonical: "https://mahimarchitect.com/",
   },
@@ -42,7 +46,7 @@ export const metadata: Metadata = {
     url: "https://mahimarchitect.com/",
     images: [
       {
-        url: "https://mahimarchitects.com/og-image.jpg",
+        url: "https://mahimarchitect.com/og-image.jpg",
         alt: "Mahim Architects - Premium Architecture Services",
         width: 1200,
         height: 630,
@@ -89,7 +93,35 @@ export default function RootLayout({
         <JsonLd data={getOrganizationSchema()} />
 
         {/* Google Search Console Verification */}
-        <meta name="google-site-verification" content="REPLACE_WITH_YOUR_GOOGLE_VERIFICATION_CODE" />
+        <meta name="google-site-verification" content="NdpqGNyZe2LJXw5qeWCc5unMjsGWS9zrIeRQl0T_UDY" />
+
+        {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XXXXXXXXXX', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
+
+        {/* Google Tag Manager */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.initialization'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-XXXXXXXXX');
+            `,
+          }}
+        />
 
         {/* Additional Meta Tags */}
         <meta name="application-name" content="Mahim Architects" />
@@ -104,6 +136,23 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="font-sans bg-neutral-50 text-neutral-900 overflow-x-hidden">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Architect",
+              name: "Mahim Architect",
+              url: "https://mahimarchitect.com",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Surat",
+                addressRegion: "Gujarat",
+                addressCountry: "India",
+              },
+            }),
+          }}
+        />
         {children}
         <FloatingActionButton />
       </body>
