@@ -261,13 +261,19 @@ export default function RootLayout({
          <Script
            src="https://www.googletagmanager.com/gtag/js?id=G-TBCDEF9XYZ"
            strategy="afterInteractive"
-           onLoad={() => {
-             window.dataLayer = window.dataLayer || [];
-             function gtag() { dataLayer.push(arguments); }
-             gtag('js', new Date());
-             gtag('config', 'G-TBCDEF9XYZ', {
-               page_path: window.location.pathname,
-             });
+         />
+         <Script
+           id="ga-config"
+           strategy="afterInteractive"
+           dangerouslySetInnerHTML={{
+             __html: `
+               window.dataLayer = window.dataLayer || [];
+               function gtag(){dataLayer.push(arguments);}
+               gtag('js', new Date());
+               gtag('config', 'G-TBCDEF9XYZ', {
+                 page_path: window.location.pathname,
+               });
+             `,
            }}
          />
 
