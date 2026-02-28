@@ -1,15 +1,18 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
+import Script from "next/script"
 import "./globals.css"
 import { FloatingActionButton } from "@/components/floating-action-button"
 import { JsonLd } from "@/components/json-ld"
 import { getOrganizationSchema, siteConfigData } from "@/lib/seo-metadata"
 
+// Optimize font loading with display swap and optimal subsets
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+  preload: true,
 })
 
 export const metadata: Metadata = {
@@ -242,51 +245,54 @@ export default function RootLayout({
   return (
     <html lang="en-IN" className={`${inter.variable} antialiased`}>
       <head>
-        {/* JSON-LD Organization Schema */}
-        <JsonLd data={getOrganizationSchema()} />
+         {/* JSON-LD Organization Schema */}
+         <JsonLd data={getOrganizationSchema()} />
 
-        {/* Google Search Console Verification */}
-        <meta name="google-site-verification" content="NdpqGNyZe2LJXw5qeWCc5unMjsGWS9zrIeRQl0T_UDY" />
+         {/* Google Search Console Verification */}
+         <meta name="google-site-verification" content="NdpqGNyZe2LJXw5qeWCc5unMjsGWS9zrIeRQl0T_UDY" />
 
-        {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-TBCDEF9XYZ" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-TBCDEF9XYZ', {
-                page_path: window.location.pathname,
-              });
-            `,
-          }}
-        />
+         {/* Preconnect to external domains for better resource loading */}
+         <link rel="preconnect" href="https://www.googletagmanager.com" />
+         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+         <link rel="preconnect" href="https://fonts.googleapis.com" />
+         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
-        {/* Google Tag Manager */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.initialization'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-AB12CD34EF');
-            `,
-          }}
-        />
+         {/* Google Analytics - Defer with afterInteractive strategy */}
+         <Script
+           src="https://www.googletagmanager.com/gtag/js?id=G-TBCDEF9XYZ"
+           strategy="afterInteractive"
+           onLoad={() => {
+             window.dataLayer = window.dataLayer || [];
+             function gtag() { dataLayer.push(arguments); }
+             gtag('js', new Date());
+             gtag('config', 'G-TBCDEF9XYZ', {
+               page_path: window.location.pathname,
+             });
+           }}
+         />
 
-        {/* Additional Meta Tags */}
-        <meta name="application-name" content="Mahim Architects" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="Mahim Architects" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="mobile-web-app-capable" content="yes" />
+         {/* Google Tag Manager - Lazy load after interaction */}
+         <Script
+           id="gtm-script"
+           strategy="afterInteractive"
+           dangerouslySetInnerHTML={{
+             __html: `
+               (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+               new Date().getTime(),event:'gtm.initialization'});var f=d.getElementsByTagName(s)[0],
+               j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+               'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+               })(window,document,'script','dataLayer','GTM-AB12CD34EF');
+             `,
+           }}
+         />
 
-        {/* Preconnect to external domains */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+         {/* Additional Meta Tags */}
+         <meta name="application-name" content="Mahim Architects" />
+         <meta name="apple-mobile-web-app-capable" content="yes" />
+         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+         <meta name="apple-mobile-web-app-title" content="Mahim Architects" />
+         <meta name="theme-color" content="#000000" />
+         <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body className="font-sans bg-neutral-50 text-neutral-900 overflow-x-hidden">
         <script

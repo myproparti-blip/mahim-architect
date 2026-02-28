@@ -14,7 +14,7 @@ export function FloatingActionButton() {
       whileTap={{ scale: 0.95 }}
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.3 }} // Reduced from 0.5 to reduce jank
     >
       <MessageCircle size={24} />
     </motion.a>

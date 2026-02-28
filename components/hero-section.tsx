@@ -43,7 +43,7 @@ export function HeroSection() {
 
   return (
     <section ref={containerRef} className="relative h-screen overflow-hidden">
-      {/* Background Image with Cinematic Effects */}
+      {/* Background Image with Cinematic Effects - Optimized for LCP */}
       <motion.div
         className="absolute inset-0"
         style={{ scale: imageScale, y: imageY }}
@@ -58,6 +58,8 @@ export function HeroSection() {
           className="object-cover"
           priority
           sizes="100vw"
+          quality={85}
+          loading="eager"
         />
         <div className="absolute inset-0 bg-black/20" />
       </motion.div>

@@ -1,11 +1,33 @@
 "use client"
+import dynamic from "next/dynamic"
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
-import { CollectionStrip } from "@/components/collection-strip"
-import { MaterialsSection } from "@/components/materials-section"
-import { EthosSection } from "@/components/ethos-section"
-import { NewsletterSection } from "@/components/newsletter-section"
-import { Footer } from "@/components/footer"
+
+// Dynamically import below-the-fold components to improve LCP
+const CollectionStrip = dynamic(() => import("@/components/collection-strip").then(mod => ({ default: mod.CollectionStrip })), {
+  loading: () => null, // Don't show a loading skeleton
+  ssr: true,
+})
+
+const MaterialsSection = dynamic(() => import("@/components/materials-section").then(mod => ({ default: mod.MaterialsSection })), {
+  loading: () => null,
+  ssr: true,
+})
+
+const EthosSection = dynamic(() => import("@/components/ethos-section").then(mod => ({ default: mod.EthosSection })), {
+  loading: () => null,
+  ssr: true,
+})
+
+const NewsletterSection = dynamic(() => import("@/components/newsletter-section").then(mod => ({ default: mod.NewsletterSection })), {
+  loading: () => null,
+  ssr: true,
+})
+
+const Footer = dynamic(() => import("@/components/footer").then(mod => ({ default: mod.Footer })), {
+  loading: () => null,
+  ssr: true,
+})
 
 export default function HomePage() {
   return (
